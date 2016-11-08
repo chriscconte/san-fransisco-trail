@@ -1,0 +1,75 @@
+<div>{{$myCtrl.player}}</div>   
+
+
+<div class="modal fade" id="myModal" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">New Investment</h4>
+        </div>
+      <div class="modal-body">
+        You are about to invest in a Startup X. Be careful, buy too much and you may lose it all. Don't buy enough and you'll end up spending all your money on rent and moving back to where you are from. Buy and sell your stock whenever you please, just don't sit on your stash too long! Things change quickly around here.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="startInvest()" data-dismiss="modal">Let's Begin!</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Not Yet</button>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    <div class="row">
+      <div class="col-md-3">
+        <div class="pull-right">
+          <button type="button" class="btn btn-primary btn-lg" ng-click="buyStock()">
+            Buy Stock 
+          </button>
+        </div>
+      </div>
+      <div class="col-md-2 text-center">
+        <h2>${{stockPriceTime[timer].y}}</h2>
+      </div>
+      <div class="col-md-3">
+        <button type="button" class="btn btn-primary btn-lg" ng-click="sellStock()">
+          Sell Stock 
+        </button>
+      </div>
+    </div>
+    
+  <div class = "row">
+    <div class="col-md-8">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <highchart id="chart1" config="chartConfig" class="span10"></highchart>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="row">
+        <div class="panel panel-default">
+          <div class="panel-heading">Stocks:</div>
+            <div class="panel-body">
+              <b>Count: </b>{{stockCount}} <br>
+              <b>Price: </b>{{stockPriceTime[timer].y}} <br>
+              <b>Value: </b>{{ stockCount * stockPriceTime[timer].y }}
+            </div>
+        </div>
+      </div>
+      <div class="row">
+              <div class="panel panel-default">
+          <div class="panel-heading">Wallet: </div>
+            <div class="panel-body">
+              {{ wallet }}
+            </div>
+        </div>
+      </div>
+      <div class="row">
+              <div class="panel panel-default">
+          <div class="panel-heading">Average Buy: </div>
+            <div class="panel-body">
+              {{averageBuy}}
+            </div>
+        </div>
+      </div>
+    </div>

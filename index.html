@@ -2,7 +2,7 @@
 <html>
 <head> 
 <!-- angular -->
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
 <!-- jquery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <!-- bootstrap -->
@@ -15,92 +15,39 @@
 <script src="https://rawgit.com/pablojim/highcharts-ng/master/src/highcharts-ng.js"></script>
     
 <!-- app -->
-<script src="app.js"></script>
+<script src="app.module.js"></script>
+<script src="app.controller.js"></script> 
+<script src="invest.component.js"></script>
 <link href="app.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body> 
   
-  <div ng-app="myApp" ng-controller="myCtrl">
+  <div ng-app="myApp" ng-controller="myCtrl as ctrl">
     <div class="container bs-docs-container">
       <div class="page-header">
-      <div class="title">San Fransisco Trail <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal" ng-hide="timer">Continue </button></div> 
-    </div> 
+      <div class="title">San Fransisco Trail </div> 
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+      <p class="navbar-text">Player: {{ctrl.player.name}}</p>
+      <p class="navbar-text">Wallet: {{ctrl.player.wallet}}</p>
+      <p class="navbar-text">Level: {{ctrl.player.level}}</p>
+      <p class="navbar-text">Score: {{ctrl.player.score}}</p>
+      </div>
+    </nav>
+  </div>
+      
+  <div ng-switch on="ctrl.mode">
+     <div class="jumbotron" ng-switch-when="0">
+       <h1>Welcome!</h1>
+       <p>Play now to have fun  <button ng-click="ctrl.play()"> </p>
+    </div>
+    <invest ng-switch-when="1" player="ctrl.player"></invest>
+    <div ng-switch-default></div>
+  </div>
 
-    <div class="modal fade" id="myModal" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">New Investment</h4>
-        </div>
-      <div class="modal-body">
-        You are about to invest in a Startup X. Be careful, buy too much and you may lose it all. Don't buy enough and you'll end up spending all your money on rent and moving back to where you are from. Buy and sell your stock whenever you please, just don't sit on your stash too long! Things change quickly around here.
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" ng-click="startInvest()" data-dismiss="modal">Let's Begin!</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Not Yet</button>
-      </div>
-    </div>
-  </div>
-</div>
-    
-    <div class="row">
-      <div class="col-md-3">
-        <div class="pull-right">
-          <button type="button" class="btn btn-primary btn-lg" ng-click="buyStock()">
-            Buy Stock 
-          </button>
-        </div>
-      </div>
-      <div class="col-md-2 text-center">
-        <h2>${{stockPriceTime[timer].y}}</h2>
-      </div>
-      <div class="col-md-3">
-        <button type="button" class="btn btn-primary btn-lg" ng-click="sellStock()">
-          Sell Stock 
-        </button>
-      </div>
-    </div>
-    
-  <div class = "row">
-    <div class="col-md-8">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <highchart id="chart1" config="chartConfig" class="span10"></highchart>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="row">
-        <div class="panel panel-default">
-          <div class="panel-heading">Stocks:</div>
-            <div class="panel-body">
-              <b>Count: </b>{{stockCount}} <br>
-              <b>Price: </b>{{stockPriceTime[timer].y}} <br>
-              <b>Value: </b>{{ stockCount * stockPriceTime[timer].y }}
-            </div>
-        </div>
-      </div>
-      <div class="row">
-              <div class="panel panel-default">
-          <div class="panel-heading">Wallet: </div>
-            <div class="panel-body">
-              {{ wallet }}
-            </div>
-        </div>
-      </div>
-      <div class="row">
-              <div class="panel panel-default">
-          <div class="panel-heading">Average Buy: </div>
-            <div class="panel-body">
-              {{averageBuy}}
-            </div>
-        </div>
-      </div>
-    </div>
-  </div>
   
+  </div>
   </div>
 </body>
 </html>
