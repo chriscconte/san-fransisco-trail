@@ -18,6 +18,7 @@
 <script src="app.module.js"></script>
 <script src="app.controller.js"></script> 
 <script src="invest.component.js"></script>
+<script src="hunt.component.js"></script>
 <link href="app.css" rel="stylesheet" type="text/css" />
 </head>
 
@@ -37,12 +38,13 @@
     </nav>
   </div>
       
-  <div ng-switch on="ctrl.mode">
+  <div ng-switch on="ctrl.player.mode">
      <div class="jumbotron" ng-switch-when="0">
        <h1>Welcome!</h1>
        <p>Play now to have fun  <button ng-click="ctrl.play()"> </p>
     </div>
     <invest ng-switch-when="1" player="ctrl.player"></invest>
+    <hunt ng-switch-when="2" player="ctrl.player"></hunt>
     <div ng-switch-default></div>
   </div>
 

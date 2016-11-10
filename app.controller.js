@@ -13,13 +13,13 @@
         name: "Player",
         score: 0,
         wallet: 5000.0,
-        level: 1
+        level: 1,
+        mode: 0,
+        isAlive: true
       };
-      ctrl.mode = 0;
-      ctrl.isAlive = true;
     
-      ctrl.play = function () { 
-        this.mode = 1;
+      ctrl.play = function () {
+        ctrl.player.mode = 1;
       };
     
       // TODO
