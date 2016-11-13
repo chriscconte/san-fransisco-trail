@@ -31,8 +31,11 @@ npm test
 
 ### Framework Versions
 AngularJS 1.5.8
+
 Stream.io 1.0
+
 Nodejs 7.1  
+
 Bootstrap 3.3.7  
 
 ### Style Guide
