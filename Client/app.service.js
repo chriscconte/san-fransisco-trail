@@ -6,7 +6,7 @@
 // In this case it is a simple value service.
 angular.module('myApp')
   .factory('socket', function ($rootScope) {
-  var socket = io.connect();
+  var socket = io.connect('http://localhost:8000/');
   return {
     on: function (eventName, callback) {
       socket.on(eventName, function () {  

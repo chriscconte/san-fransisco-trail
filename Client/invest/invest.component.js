@@ -35,7 +35,7 @@
       },
       xAxis: {
         currentMin: 0,
-        currentMax: numPoints,
+        currentMax: 300,
         title: {text: 'Days'}
       },
       yAxis: {
@@ -48,6 +48,7 @@
     
     $scope.startInvest = function () {
       socket.emit('startInvest', {level: 1});
+      $scope.started = true;
     };
     
     socket.on('addNewPoint', function(resp) {
@@ -56,6 +57,7 @@
     })
     
     socket.on('endInvest', function(resp) {
+      console.log('werk');
       $scope.finished = true;
     })
     
@@ -67,6 +69,7 @@
     socket.on('buyStock', function (resp) {
       if(resp.success) {
         $scope.walletTemp = resp.wallet;
+        
       }
     });
     $scope.buyStock = function () {
