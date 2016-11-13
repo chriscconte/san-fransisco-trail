@@ -1,0 +1,30 @@
+{
+  "name": "san-fransisco-trail",
+  "version": "1.0.0",
+  "description": "game",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chriscconte/san-fransisco-trail.git"
+  },
+  "keywords": [
+    "game"
+  ],
+  "author": "Christopher Conte and Kaveh Issapour",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chriscconte/san-fransisco-trail/issues"
+  },
+  "homepage": "https://github.com/chriscconte/san-fransisco-trail#readme",
+  "peerDependencies": {
+    "concat-stream": "1.5.2"
+  },
+  "dependencies": {
+    "express": "^4.14.0",
+    "lodash": "^4.16.6",
+    "socket.io": "^1.5.1"
+  }
+}

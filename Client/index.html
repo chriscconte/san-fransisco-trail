@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head> 
+<!-- angular -->
+<script src="./bower_components/angular/angular.js"></script>
+<!-- jquery -->
+<script src="./bower_components/jquery/dist/jquery.js"></script>
+<!-- bootstrap -->
+<link href="./bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css" />
+<script src="./bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+ 
+<!-- angular highcharts -->
+<script src="./bower_components/highcharts-ng/dist/highcharts-ng.js"></script>
+  
+<!-- ng socket.io -->
+<script src="./bower_components/angular-socket-io/socket.js"></script>
+    
+<!-- app -->
+<script src="./app.module.js"></script>
+<script src="./app.controller.js"></script> 
+<script src="./app.service.js"></script>  
+<script src="./invest/invest.component.js"></script>
+<script src="./hunt/hunt.component.js"></script>
+<link href="./app.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body> 
+  
+  <div ng-app="myApp" ng-controller="myCtrl as ctrl">
+    <div class="container bs-docs-container">
+      <div class="page-header">
+      <div class="title">San Fransisco Trail </div> 
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+      <p class="navbar-text">Player: {{ctrl.player.name}}</p>
+      <p class="navbar-text">Wallet: {{ctrl.player.wallet}}</p>
+      <p class="navbar-text">Level: {{ctrl.player.level}}</p>
+      <p class="navbar-text">Score: {{ctrl.player.score}}</p>
+      </div>
+    </nav>
+  </div>
+      
+  <div ng-switch on="ctrl.player.mode">
+     <div class="jumbotron" ng-switch-when="0">
+       <h1>Welcome!</h1>
+       <p>Play now to have fun  <button ng-click="ctrl.play()"> </p>
+    </div>
+    <invest ng-switch-when="1" player="ctrl.player"></invest>
+    <hunt ng-switch-when="2" player="ctrl.player"></hunt>
+    <div ng-switch-default></div>
+  </div>
+
+  
+  </div>
+  </div>
+</body>
+</html>
