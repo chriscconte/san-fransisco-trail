@@ -1,4 +1,5 @@
-var express = require('express');
+var express = require('express'),
+    path    = require('path');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
@@ -10,10 +11,11 @@ server.listen(port, function() {
 });
  
 // Serve the client
-var staticPath = path.join(__dirname, '../client/dist');
-app.use(express.static(staticPath);
+var staticPath = path.join(__dirname, '../Client');
+app.use(express.static(staticPath));
+        
 app.get('/', function(req, res) {
-  res.sendfile(__dirname + '/public/index.html');
+  res.sendfile(__dirname + 'index.html');
 });
  
 // Handle socket.io

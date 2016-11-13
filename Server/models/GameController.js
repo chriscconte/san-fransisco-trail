@@ -1,29 +1,68 @@
-function() {
+(function() {
   var InvestPhase = require('./InvestPhase');
-  var GameController = function(config) {
+  
+  var GameController = function(config) {   
     
-    this.id       = config.id || '';
-    this.name     = config.name || 'Player';
+    var id       = config.id || '';
+    var name     = config.name || 'Player';
     
-    this.score = 0;
-    this.level = 1;
-    this.wallet = 5000;
-    this.phase = null;
-    this.isDead = 0;
+    var score = 0;
+    var level = 1;
+    var wallet = 5000;
+    var phase = null;
+    var isDead = 0;
+    
+    var gc = { };
+    
+    
+    gc.getId = function() {
+      return id;
+    };
+    
+    gc.getWallet = function() {
+      return wallet;
+    };
+    
+    gc.setWallet = function(value) {
+      return wallet = value;
+    };
+    
+    gc.getLevel = function() {
+      return level;
+    };
+    
+    gc.incrementLevel = function() {
+      level += 1;
+    };
+    
+    gc.getName = function() {
+      return name;
+    };
+    
+    gc.setName = function(data) {
+      name = data.name;
+    };
+    
+    gc.setPhase = function(data) {
+      
+      if (data.text == 'invest') {
+        phase = new InvestPhase(
+          {level: level, wallet: wallet}
+        );
+      }
+      else if (data.text == 'hunt') { }
+      else {
+        phase = null;
+      }
+    };
+    
+    gc.getPhase = function() {
+      return phase;
+    }
 
-    //this.lastShot = {};
+    return gc;
   };
 
   module.exports = GameController;
-
-  GameController.prototype.setName = function(data) {
-    this.name = data.name;
-  };
-  
-  GameController.prototype.invest = function(data) {
-    this.phase = new InvestPhase(
-      {level: this.level, wallet: this.wallet}
-    );
-  }
 
 })();
