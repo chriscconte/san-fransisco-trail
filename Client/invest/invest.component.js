@@ -57,7 +57,6 @@
     })
     
     socket.on('endInvest', function(resp) {
-      console.log('werk');
       $scope.finished = true;
     })
     
@@ -67,41 +66,49 @@
     };
     
     socket.on('buyStock', function (resp) {
-      if(resp.success) {
-        $scope.walletTemp = resp.wallet;
-        
+      if(!resp.success) {
+        document.getElementById('buyStock').class = "btn btn-warning btn-lg";
+        $timeout(
+          function() {
+            document.getElementById('buyStock').class = "btn btn-primary btn-lg";
+          },
+          100
+        );
       }
+      else {
+        $scope.buyCount += 1;
+        $scope.totalBuy += $scope.currentPrice;
+        $scope.averageBuy = Math.round($scope.totalBuy / $scope.buyCount, 2);
+      }
+      
+      $scope.stockCount = resp.stockCount;
+      $scope.walletTemp = resp.wallet;
     });
+    
+    
     $scope.buyStock = function () {
       socket.emit('buyStock');
     };
     
-    $scope.buyStockButtonClass = function () {
-      if ($scope.walletTemp < $scope.currentPrice) {
-        return "btn btn-warning btn-lg";
-      }
-      else {
-        return "btn btn-primary btn-lg";
-      }
-    };
-    
     socket.on('sellStock', function (resp) {
-      if(resp.success) {
-        $scope.walletTemp = resp.wallet;
+      if(!resp.success) {
+        document.getElementById('sellStock').class = "btn btn-warning btn-lg";
+        $timeout(
+          function() {
+            document.getElementById('sellStock').class = "btn btn-primary btn-lg";
+          },
+          100
+        );
       }
+      
+      $scope.stockCount = resp.stockCount;
+      $scope.walletTemp = resp.wallet;
     });
+    
     $scope.sellStock = function () {
       socket.emit('sellStock');
     };
     
-    $scope.sellStockButtonClass = function () {
-      if ($scope.stockCount) {
-        return "btn btn-primary btn-lg";
-      }
-      else {
-        return "btn btn-warning btn-lg";
-      }
-    };
   };
 
   angular.module('myApp').component('invest', {

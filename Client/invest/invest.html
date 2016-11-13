@@ -1,8 +1,6 @@
 <div class="game-container">
       <div class="game-message" ng-if="!started && !finished">
         <div>
-        
-            
               You are about to invest in a Startup X. Be careful, buy too much and you may lose it all. Don't buy enough and you'll end up spending all your money on rent and moving back to where you are from. Buy and sell your stock whenever you please, just don't sit on your stash too long! Things change quickly around here. 
           </div> 
             <button type="button" class="btn btn-primary btn-lg" ng-click="startInvest()">
@@ -25,8 +23,7 @@
         <div class="pull-right">
           <button 
             type="button" 
-            ng-class="buyStockButtonClass()" 
-            ng-disabled="!started || finished || (walletTemp < currentPrice)"  
+            class="btn btn-primary btn-lg"
             ng-click="buyStock()" >
             Buy Stock 
           </button>
@@ -38,8 +35,7 @@
       <div class="col-md-3">
         <button 
             type="button" 
-            ng-class="sellStockButtonClass()" 
-            ng-disabled="!started || finished || !stockCount"  
+            class="btn btn-primary btn-lg"  
             ng-click="sellStock()" >
           Sell Stock 
         </button>
