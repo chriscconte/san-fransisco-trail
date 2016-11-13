@@ -8,9 +8,13 @@ Members:
 A parody of Oregon Trail, for ASE
 
 ### Build Script:
+
 bower install -g
+
 npm install -g
+
 node index.js
+
 /// Running on port  8000 ...
 
 ### Framework Versions
