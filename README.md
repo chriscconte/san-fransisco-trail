@@ -3,6 +3,7 @@
 ### Team SF Trail
 Members:
 Kaveh Issapour
+
 Chris Conte
 
 A parody of Oregon Trail, for ASE
