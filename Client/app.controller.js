@@ -6,8 +6,12 @@
   'use strict';
   
   angular.module('myApp')
-    .controller('myCtrl', function ($scope, $interval) {
+    .controller('myCtrl', function ($scope, $interval, socket) {
       var ctrl = this;
+    
+      socket.on('connected', function(data) {
+        ctrl.id = data.id;
+      })
     
       ctrl.player = {
         name: "Player",

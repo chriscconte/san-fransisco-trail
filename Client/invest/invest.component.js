@@ -1,16 +1,14 @@
 (function (angular) {
   'use strict';
   
-  function InvestPartController($scope, $interval, $timeout) {
+  function InvestPartController($scope, $interval, $timeout, socket) {
     
-    var TIME_MS = 3.0e4,
-      TIME_INTERVAL_MS = 100.0,
-      numPoints = TIME_MS / TIME_INTERVAL_MS,
-      ctrl = this;
+    var ctrl = this;
+    
     $scope.player = ctrl.player;
     $scope.walletTemp =  ctrl.player.wallet;
     $scope.stockCount = 0;
-    $scope.currentPrice = Math.round(Math.random() * 1000, 2);
+    $scope.currentPrice = 0;
     $scope.stockPrice = [$scope.currentPrice];
     $scope.started = false;
     $scope.finished = false;
@@ -49,37 +47,30 @@
     };
     
     $scope.startInvest = function () {
-      $scope.started = true;
-      $interval(
-        function () {
-          var stockPrice = $scope.chartConfig.series[0].data,
-              delta = (Math.random() - 0.5) * 120,
-              newPrice = Math.abs(stockPrice[stockPrice.length - 1] + delta);
-          
-          if (newPrice > 1000) {
-            newPrice = newPrice - 2 * delta;
-          };
-          $scope.currentPrice = Math.round(newPrice, 2);
-          stockPrice.push($scope.currentPrice);
-        },
-        TIME_INTERVAL_MS,
-        numPoints - 1
-      );
-      $timeout(function() { $scope.finished = true; }, TIME_MS + 200.0);
+      socket.emit('startInvest', {level: 1});
     };
     
+    socket.on('addNewPoint', function(resp) {
+      $scope.currentPrice = resp.price;
+      $scope.stockPrice.push(resp.price);
+    })
+    
+    socket.on('endInvest', function(resp) {
+      $scope.finished = true;
+    })
+    
     $scope.finishInvest = function() {
-      ctrl.player.wallet = $scope.walletTemp + $scope.stockCount * $scope.currentPrice;
+      // socket.emit('continueToHunt');
       ctrl.player.mode = 2;
     };
     
+    socket.on('buyStock', function (resp) {
+      if(resp.success) {
+        $scope.walletTemp = resp.wallet;
+      }
+    });
     $scope.buyStock = function () {
-      $scope.buyCount += 1;
-      $scope.totalBuy += $scope.currentPrice;
-      $scope.averageBuy = Math.round($scope.totalBuy / $scope.buyCount, 2);
-      // buy 
-      $scope.walletTemp -= $scope.currentPrice;
-      $scope.stockCount += 1;
+      socket.emit('buyStock');
     };
     
     $scope.buyStockButtonClass = function () {
@@ -91,17 +82,13 @@
       }
     };
     
-    $scope.sellStock = function () {
-      if ($scope.stockCount) {
-        $scope.stockCount -= 1;
-        $scope.walletTemp += $scope.currentPrice;
-      } else {
-        // TODO Turn button Red
-        document.getElementById('sell-stock').class = "btn btn-danger";
-        $timeout(function () {
-          document.getElementById('sell-stock').class = "btn btn-primary";
-        }, 100);
+    socket.on('sellStock', function (resp) {
+      if(resp.success) {
+        $scope.walletTemp = resp.wallet;
       }
+    });
+    $scope.sellStock = function () {
+      socket.emit('sellStock');
     };
     
     $scope.sellStockButtonClass = function () {
@@ -115,10 +102,11 @@
   };
 
   angular.module('myApp').component('invest', {
-    templateUrl: 'invest.html',
+    templateUrl: './invest/invest.html',
     controller: InvestPartController,
     bindings: {
-      player: '='
+      player: '=',
+      id: '='
     }
   });
   

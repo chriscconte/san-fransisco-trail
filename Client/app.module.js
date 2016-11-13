@@ -3,7 +3,7 @@
   'use strict';
   
   // Declare app level module which depends on views, and components
-  angular.module('myApp', [
+  var app = angular.module('myApp', [
     'highcharts-ng',
     'btford.socket-io'
   ]);
