@@ -1,6 +1,6 @@
 var should = require('should');
 var io = require('socket.io-client'),
-    server = require('../chat-server');
+    server = require('../index.js');
 
 var socketURL = 'http://localhost:8000';
 
@@ -20,7 +20,7 @@ describe("Game Server",function(){
     var client = io.connect(socketURL, options);
 
     client.on('connected',function(data){
-      client.emit('startInvest', player1);
+      client.emit('startInvest');
     });
 
     client.on('addNewPoint',function(data){
@@ -48,10 +48,11 @@ describe("Game Server",function(){
         client2.emit('startInvest', player2);
       });
 
-      client2.on('addNewPoint', function(usersName){
+      client2.on('addNewPoint', function(data){
         data.should.be.type('object');
         data.should.have.property('price');
         client2.disconnect();
+        done();
       });
 
     });
@@ -81,6 +82,7 @@ describe("Game Server",function(){
       
       client.on('buyStock', function(data){
         data.success.should.equal(true);
+        client.disconnect();
         done(); 
       })
     });
