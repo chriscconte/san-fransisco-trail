@@ -13,7 +13,7 @@ Python 2.7
 Django 1.10.2  
 Bootstrap 3.3.7  
 
-# Style Guide
+### Style Guide
 https://github.com/johnpapa/angular-styleguide
 
 ### More coming soon!
