@@ -31,8 +31,8 @@ npm test
 
 ### Framework Versions
 AngularJS 1.5.8
-Python 2.7  
-Django 1.10.2  
+Stream.io 1.0
+Nodejs 7.1  
 Bootstrap 3.3.7  
 
 ### Style Guide
