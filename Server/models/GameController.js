@@ -50,7 +50,11 @@
           {level: level, wallet: wallet}
         );
       }
-      else if (data.text == 'hunt') { }
+      else if (data.text == 'hunt') { 
+        phase = new HuntPhase(
+          {level: level, wallet: wallet}
+        );
+      }
       else {
         phase = null;
       }

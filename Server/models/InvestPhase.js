@@ -8,7 +8,7 @@
     var beginTime = 0;
     var finished = false;
     var begin = false;
-    var stockPrice = 0;
+    var stockPrice = Math.random() * 300;
     var stockCount = 0;
     
     var ip = {};
@@ -40,6 +40,7 @@
     };
     
     ip.endInvest = function() {
+      wallet += stockPrice * stockCount;
       finished = true;
     }
     

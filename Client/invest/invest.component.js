@@ -8,8 +8,8 @@
     $scope.player = ctrl.player;
     $scope.walletTemp =  ctrl.player.wallet;
     $scope.stockCount = 0;
-    $scope.currentPrice = 0;
-    $scope.stockPrice = [$scope.currentPrice];
+    $scope.currentPrice = null;
+    $scope.stockPrice = [];
     $scope.started = false;
     $scope.finished = false;
     $scope.totalBuy = 0;
@@ -48,8 +48,12 @@
     
     $scope.startInvest = function () {
       socket.emit('startInvest', {level: 1});
-      $scope.started = true;
     };
+    socket.on('begin', function(resp){
+      $scope.started = true;
+      $scope.currentPrice = resp.price;
+      $scope.stockPrice.push($scope.currentPrice);
+    })
     
     socket.on('addNewPoint', function(resp) {
       $scope.currentPrice = resp.price;
@@ -57,6 +61,7 @@
     })
     
     socket.on('endInvest', function(resp) {
+      $scope.walletTemp = resp.wallet;
       $scope.finished = true;
     })
     

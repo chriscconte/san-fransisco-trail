@@ -29,6 +29,8 @@ module.exports =
       socket.on('sellStock', onSellStock);
       socket.on('startInvest', onStartInvest);
       
+      socket.on('startHunt', onStartHunt);
+      socket.on('testWord', onTestWord);
     });
   };
   
@@ -49,6 +51,7 @@ module.exports =
     game.setPhase({ text:'invest' });
     var InvestPhase = game.getPhase();
     InvestPhase.startInvest();
+    self.emit('begin', {price: InvestPhase.getStockPrice()});
     
     var addNewPointsInterval = setInterval(
       function () {
@@ -62,7 +65,8 @@ module.exports =
       function() { 
         clearInterval(addNewPointsInterval);
         InvestPhase.endInvest();
-        self.emit('endInvest');
+        
+        self.emit('endInvest', {wallet: InvestPhase.getWallet()});
       }, 
       TIME_MS + 200.0
     );
@@ -97,6 +101,35 @@ module.exports =
       stockCount: InvestPhase.getStockCount()
     });
   };
+  
+  function onStartHunt() { 
+    var TIME_MS = 3.0e4;
+    var TIME_INTERVAL_MS = 5.0e3;
+    
+    var self = this;
+    
+    var game = gameById(this.id);
+    
+    if (!game) {
+      util.log("game not found: " + this.id);
+      return;
+    }
+    
+    game.setPhase({ text:'hunt' });
+    var HuntPhase = game.getPhase();
+    HuntPhase.startHunt();
+    self.emit('begin', {words: HuntPhase.getWords()});
+    
+    var addNewPointsInterval = setInterval(
+      function () {
+        HuntPhase.newWords();
+        self.emit('addNewPoint', {words: HuntPhase.getWords()});
+      },
+      TIME_INTERVAL_MS
+    );
+  };
+  
+  function onTestWord() { };
 
   function onSetPlayerName(data) {
     console.log('onSetPlayerName', data);
