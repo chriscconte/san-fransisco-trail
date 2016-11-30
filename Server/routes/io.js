@@ -129,7 +129,29 @@ module.exports =
     );
   };
   
-  function onTestWord() { };
+  function onTestWord(resp) { 
+    console.log('onTestWord');
+    
+    var game = gameById(this.id);
+    
+    if (!game) {
+      util.log("game not found: " + this.id);
+      return;
+    }
+    
+    var HuntPhase = game.getPhase();
+    if(!HuntPhase.isCorrect(resp)) {
+      socket.emit('incorrect');
+    }
+    else {
+      socket.emit('correct', {score: HuntPhase.getWord().score})
+    }
+    if(HuntPhase.getOpportunityToNext() <= 0) {
+      socket.emit('finished');
+      
+      game.setPhase('invest');
+    }
+  };
 
   function onSetPlayerName(data) {
     console.log('onSetPlayerName', data);
