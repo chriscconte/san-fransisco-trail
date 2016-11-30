@@ -48,7 +48,7 @@ module.exports =
       return;
     }
     
-    game.setPhase({ text:'invest' });
+    game.setPhase('invest');
     var InvestPhase = game.getPhase();
     InvestPhase.startInvest();
     self.emit('begin', {price: InvestPhase.getStockPrice()});
@@ -115,15 +115,15 @@ module.exports =
       return;
     }
     
-    game.setPhase({ text:'hunt' });
+    game.setPhase('hunt');
     var HuntPhase = game.getPhase();
     HuntPhase.startHunt();
-    self.emit('begin', {words: HuntPhase.getWords()});
+    self.emit('begin', {words: HuntPhase.getWord()});
     
     var addNewPointsInterval = setInterval(
       function () {
-        HuntPhase.newWords();
-        self.emit('addNewPoint', {words: HuntPhase.getWords()});
+        HuntPhase.newWord();
+        self.emit('newWords', {word: HuntPhase.getWord()});
       },
       TIME_INTERVAL_MS
     );

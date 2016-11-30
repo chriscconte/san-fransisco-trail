@@ -45,12 +45,12 @@
     
     gc.setPhase = function(data) {
       
-      if (data.text == 'invest') {
+      if (data === 'invest') {
         phase = new InvestPhase(
           {level: level, wallet: wallet}
         );
       }
-      else if (data.text == 'hunt') { 
+      else if (data === 'hunt') { 
         phase = new HuntPhase(
           {level: level, wallet: wallet}
         );

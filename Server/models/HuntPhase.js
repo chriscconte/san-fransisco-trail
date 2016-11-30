@@ -1,6 +1,6 @@
 (function() {
 
-  var InvestPhase = function(config) {
+  var HuntPhase = function(config) {
     
     var wallet = config.wallet;
     var level = config.level;
@@ -8,7 +8,7 @@
     var opportunityToNext = 100;
     var finished = false;
     var begin = false;
-    var currentWords = [null, null, null, null];
+    var currentWord = null;
     var dictionary = [
       {
         word: "att",
@@ -50,23 +50,28 @@
       return wallet;
     }
     
-    ip.getWords = function() {
+    ip.getWord = function() {
       return currentWords;
     }
     
-    ip.newWords = function() {
-      
-      a = Math.round(Math.random()*dictionary.length*2);
-      b = Math.round(Math.random()*dictionary.length*2);
-      c = Math.round(Math.random()*dictionary.length*2);
-      d = Math.round(Math.random()*dictionary.length*2);
-      
-      currentWords = [
-        dictionary[a],
-        dictionary[b],
-        dictionary[c],
-        dictionary[d]
-      ]
+    ip.getOpportunityToNext = function() {
+      return opportunityToNext;
+    }
+    
+    ip.isCorrect = function(resp) {
+      if(resp.guess === currentWord.word) {
+        opportunityToNext -= currentWord.score;
+        return currentWord.score;
+      }
+      else {
+        finished = true;
+        return 0;
+      }
+    }
+    
+    ip.newWord = function() {
+      a = Math.floor(Math.random()*dictionary.length);
+      currentWords = dictionary[a];
     };
     
     ip.startHunt = function() {
@@ -77,14 +82,10 @@
       finished = true;
     }
     
-    ip.continueToInvest = function() {
-       
-    };
-
     return ip;  
     
   };
 
-  module.exports = InvestPhase;
+  module.exports = HuntPhase;
 
 })();
