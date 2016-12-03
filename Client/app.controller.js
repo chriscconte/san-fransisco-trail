@@ -9,25 +9,35 @@
     .controller('myCtrl', function ($scope, $interval, socket) {
       var ctrl = this;
     
-      socket.on('connected', function(data) {
-        ctrl.id = data.id;
-      })
-    
       ctrl.player = {
         name: "Player",
         score: 0,
         wallet: 5000.0,
         level: 1,
         mode: 0,
-        isAlive: true
+        isDead: false
       };
+    
+      ctrl.leaderboard = [];
     
       ctrl.play = function () {
         ctrl.player.mode = 1;
       };
+      ctrl.getLeaderboard = function(page) {
+        socket.emit('getLeaderboard', {page: page});
+      }
+      
+      socket.on('connected', function(data) {
+        ctrl.id = data.id;
+        ctrl.leaderboard = ctrl.leaderboard.concat(data.leaderboard);
+      });
     
-      // TODO
-      ctrl.playHuntLevel = function () { };
-      ctrl.postScore = function () { };
+      socket.on('leaderboard', function(data) {
+        ctrl.leaderboard.concat(data.leaderboard);
+      });
+    
+      ctrl.postScore = function () {
+         socket.emit('postScore');
+      };
     });
 }());

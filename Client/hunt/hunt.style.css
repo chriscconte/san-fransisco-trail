@@ -1,0 +1,8 @@
+
+.circle {
+    display:block;
+    background-color: #ff6060;
+    -moz-border-radius: 1000px;
+    -webkit-border-radius: 1000px;
+    border-radius: 1000px;
+}

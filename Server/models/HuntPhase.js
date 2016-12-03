@@ -5,10 +5,10 @@
     var wallet = config.wallet;
     var level = config.level;
     
-    var opportunityToNext = 100;
-    var finished = false;
+    var opportunityToNext = Math.pow(100,level);
+    var dead = false;
     var begin = false;
-    var currentWord = null;
+    var advance = false;
     var dictionary = [
       {
         word: "att",
@@ -43,44 +43,59 @@
         score: 10
       }
     ];
+    var currentWord = dictionary[0];
     
     var ip = {};
     
     ip.getWallet = function() {
-      return wallet;
-    }
+      return config.wallet;
+    };
     
     ip.getWord = function() {
-      return currentWords;
-    }
+      return currentWord;
+    };
+    
+    ip.isAdvance = function() {
+      return advance;
+    };
+    
+    ip.isDead = function() {
+      return dead;
+    };
     
     ip.getOpportunityToNext = function() {
       return opportunityToNext;
-    }
+    };
     
     ip.isCorrect = function(resp) {
+      console.log("guess   "+ resp.guess+ "\n Word   "+currentWord.word);
+      
       if(resp.guess === currentWord.word) {
         opportunityToNext -= currentWord.score;
+        config.score += currentWord.score;
+        if(opportunityToNext <= 0) {
+          advance = true;
+        }
         return currentWord.score;
       }
       else {
-        finished = true;
+        config.wallet -= currentWord.score * 100;
+        if(config.wallet <= 0){
+          config.wallet = 0;
+          dead = true;
+        }
         return 0;
       }
-    }
+    };
     
     ip.newWord = function() {
       a = Math.floor(Math.random()*dictionary.length);
-      currentWords = dictionary[a];
+      currentWord = dictionary[a];
     };
     
     ip.startHunt = function() {
       begin = true;
     };
-    
-    ip.endHunt = function() {
-      finished = true;
-    }
     
     return ip;  
     

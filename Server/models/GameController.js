@@ -1,5 +1,6 @@
 (function() {
   var InvestPhase = require('./InvestPhase');
+  var HuntPhase = require('./HuntPhase');
   
   var GameController = function(config) {   
     
@@ -10,25 +11,37 @@
     var level = 1;
     var wallet = 5000;
     var phase = null;
-    var isDead = 0;
+    var isDead = false;
     
     var gc = { };
     
-    
     gc.getId = function() {
       return id;
+    };
+    
+    gc.getScore = function() {
+      return score;
+    };
+    
+    gc.getLevel = function() {
+      return level;
     };
     
     gc.getWallet = function() {
       return wallet;
     };
     
+    gc.setScore = function(newScore) {
+      score = newScore;
+      return score;
+    }
+    
+    gc.die = function() {
+      isDead = true;
+    }
+    
     gc.setWallet = function(value) {
       return wallet = value;
-    };
-    
-    gc.getLevel = function() {
-      return level;
     };
     
     gc.incrementLevel = function() {
@@ -47,12 +60,12 @@
       
       if (data === 'invest') {
         phase = new InvestPhase(
-          {level: level, wallet: wallet}
+          {level: level, wallet: wallet, score: score}
         );
       }
       else if (data === 'hunt') { 
         phase = new HuntPhase(
-          {level: level, wallet: wallet}
+          {level: level, wallet: wallet, score: score}
         );
       }
       else {
@@ -62,7 +75,16 @@
     
     gc.getPhase = function() {
       return phase;
-    }
+    };
+    
+    gc.getDataToPost = function() {
+      if (isDead) {
+        return {name: name, score: score};
+      }
+      else {
+        return null;
+      }
+    };
 
     return gc;
   };

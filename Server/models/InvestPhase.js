@@ -2,7 +2,6 @@
 
   var InvestPhase = function(config) {
     
-    var wallet = config.wallet;
     var level = config.level;
     
     var beginTime = 0;
@@ -14,7 +13,11 @@
     var ip = {};
     
     ip.getWallet = function () {
-      return wallet;
+      return config.wallet;
+    }
+    
+    ip.getScore = function() {
+      return config.score;
     }
     
     ip.getStockPrice = function () {
@@ -40,14 +43,16 @@
     };
     
     ip.endInvest = function() {
-      wallet += stockPrice * stockCount;
+      config.wallet += stockPrice * stockCount;
       finished = true;
+      return config.wallet;
     }
     
     ip.buyStock = function(data) {
-      if (wallet > stockPrice) {
-        wallet -= stockPrice;
+      if (config.wallet > stockPrice) {
+        config.wallet -= stockPrice;
         stockCount += 1;
+        config.score += 1;
         return true;
       }
       else {
@@ -57,7 +62,8 @@
     
     ip.sellStock = function(data) {
       if (stockCount) {
-        wallet += stockPrice;
+        config.wallet += stockPrice;
+        config.score += 1;
         stockCount -= 1;
         return true;
       }

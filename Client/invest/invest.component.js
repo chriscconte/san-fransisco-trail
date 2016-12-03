@@ -53,25 +53,27 @@
       $scope.started = true;
       $scope.currentPrice = resp.price;
       $scope.stockPrice.push($scope.currentPrice);
-    })
+    });
     
     socket.on('addNewPoint', function(resp) {
       $scope.currentPrice = resp.price;
       $scope.stockPrice.push(resp.price);
-    })
+    });
     
     socket.on('endInvest', function(resp) {
       $scope.walletTemp = resp.wallet;
       $scope.finished = true;
-    })
+    });
     
     $scope.finishInvest = function() {
       // socket.emit('continueToHunt');
+      ctrl.player.wallet = $scope.walletTemp;
       ctrl.player.mode = 2;
     };
     
     socket.on('buyStock', function (resp) {
       if(!resp.success) {
+        // BUGBUG: cannot set property 'class' of null 
         document.getElementById('buyStock').class = "btn btn-warning btn-lg";
         $timeout(
           function() {
@@ -84,12 +86,12 @@
         $scope.buyCount += 1;
         $scope.totalBuy += $scope.currentPrice;
         $scope.averageBuy = Math.round($scope.totalBuy / $scope.buyCount, 2);
+        ctrl.player.score = resp.score;
       }
       
       $scope.stockCount = resp.stockCount;
       $scope.walletTemp = resp.wallet;
     });
-    
     
     $scope.buyStock = function () {
       socket.emit('buyStock');
@@ -105,7 +107,7 @@
           100
         );
       }
-      
+      ctrl.player.score = resp.score;
       $scope.stockCount = resp.stockCount;
       $scope.walletTemp = resp.wallet;
     });
@@ -121,6 +123,7 @@
     controller: InvestPartController,
     bindings: {
       player: '=',
+      wallet: '=',
       id: '='
     }
   });

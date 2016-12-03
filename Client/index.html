@@ -24,7 +24,10 @@
 <script src="./app.service.js"></script>  
 <script src="./invest/invest.component.js"></script>
 <script src="./hunt/hunt.component.js"></script>
+
+<link href="./hunt/hunt.style.css" rel="stylesheet" type="text/css">
 <link href="./app.css" rel="stylesheet" type="text/css" />
+
 </head>
 
 <body> 
@@ -32,29 +35,68 @@
   <div ng-app="myApp" ng-controller="myCtrl as ctrl">
     <div class="container bs-docs-container">
       <div class="page-header">
-      <div class="title">San Fransisco Trail </div> 
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-      <p class="navbar-text">Player: {{ctrl.player.name}}</p>
-      <p class="navbar-text">Wallet: {{ctrl.player.wallet}}</p>
-      <p class="navbar-text">Level: {{ctrl.player.level}}</p>
-      <p class="navbar-text">Score: {{ctrl.player.score}}</p>
+      <div class="title">         
+        <img class="logo" src="images/logo.png">
+        JP Moregon Trail 
+      </div> 
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+          <p class="navbar-text">Player: {{ctrl.player.name}}</p>
+          <p class="navbar-text">Wallet: {{ctrl.player.wallet}}</p>
+          <p class="navbar-text">Level: {{ctrl.player.level}}</p>
+          <p class="navbar-text">Score: {{ctrl.player.score}}</p>
+          </div>
+        </nav>
       </div>
-    </nav>
-  </div>
       
-  <div ng-switch on="ctrl.player.mode">
-     <div class="jumbotron" ng-switch-when="0">
-       <h1>Welcome!</h1>
-       <p>Play now to have fun  <button ng-click="ctrl.play()"> </p>
+      <div ng-switch on="ctrl.player.mode">
+        <div ng-switch-when="0">
+          <div class="jumbotron">
+            <h1>Welcome!</h1>
+            <p>Play now to have fun  <button ng-click="ctrl.play()"> </p>
+          </div>
+          <div class="panel panel-default">         
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                Leaderboard
+              </h3>
+            </div>
+            
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>
+                    Name
+                  </th>
+                  <th>
+                    Score
+                  </th>         
+                </tr>
+              </thead>
+            
+              <tbody>
+                <tr ng-repeat="item in ctrl.leaderboard">
+                  <td>{{item.member}}</td>
+                  <td>{{item.score}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <invest ng-switch-when="1" player="ctrl.player"></invest>
+        <hunt ng-switch-when="2" player="ctrl.player"></hunt>
+        <div ng-switch-when="3" player="ctrl.player">
+          <div class="jumbotron">
+            Enter Your Name
+            <div class="input-group">
+              <input type="text" ng-model="ctrl.player.name" class="form-control">
+            </div>
+            <button ng-click="ctrl.postScore()"/>
+          </div>
+        </div>
+        <div ng-switch-default></div>
+      </div>
     </div>
-    <invest ng-switch-when="1" player="ctrl.player"></invest>
-    <hunt ng-switch-when="2" player="ctrl.player"></hunt>
-    <div ng-switch-default></div>
-  </div>
-
-  
-  </div>
   </div>
 </body>
 </html>

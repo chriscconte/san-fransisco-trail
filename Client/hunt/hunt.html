@@ -1,8 +1,53 @@
-
-      <div>
-        This is the hunt page.
+<div class="game-container">
+<div class="game-message" ng-if="!started && !finished">
+  <div>
+   You are about to begin the hunt phase. Type the words that appear on the screen, or it will cost you! Type too slow, or too many wrong words and you lose your next opportunity.
+  </div> 
+  <button type="button" class="btn btn-primary btn-lg" ng-click="startHunt()">
+  Start
+  </button>
+</div>
+<div class="game-message" ng-if="started && advance">
+  <div>
+   Good job! You found your next opportunity. Time to invest again!
+  </div> 
+  <button type="button" class="btn btn-primary btn-lg" ng-click="advanceToInvest()">
+  Continue
+  </button>
+</div>
+<div class="game-message" ng-if="started && dead">
+  <div>
+   That's it for now! Continue to enter your name and post your score.
+  </div> 
+  <button type="button" class="btn btn-primary btn-lg" ng-click="advanceToPost()">
+  Continue
+  </button>
+</div>
+  
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" ng-style="{'width':''+100*opportunityGained/opportunityToNext+'%'}">
+        {{opportunityGained}}
       </div>
-      <button type="button" class="btn btn-primary btn-lg" ng-click="startInvest()">
-            Start
-          </button>
+    </div>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" ng-style="{'width':''+timer+'%'}">
+        {{timer}}
+      </div>
+    </div>
+    {{currentWord.word}}
+  </div>
+</div>
 
+<div class="panel panel-default">
+  <div class="panel-body">
+    <form ng-submit="testWord()">
+      <div class="input-group">
+        <input type="text" ng-model="guess" class="form-control" aria-describedby="basic-addon1">
+        <input type="submit" style="display: hidden;">
+      </div>
+    </form>
+  </div>
+</div>
+</div>

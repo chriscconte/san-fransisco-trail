@@ -68,3 +68,13 @@ div.title {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+
+.logo{
+    height: 70px;
+    width: 70px;
+}
+
+.logo img{
+    box-shadow: 0 0 10px 10px #000;
+    border-radius: 100%;
+}

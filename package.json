@@ -20,11 +20,15 @@
     "concat-stream": "1.5.2"
   },
   "dependencies": {
+    "assert": "^1.4.1",
+    "async": "^2.1.4",
     "concat-stream": "^1.5.2",
     "express": "^4.14.0",
+    "leaderboard": "0.0.9",
     "lodash": "^4.16.6",
     "mocha": "^3.1.2",
     "path": "^0.12.7",
+    "redis": "^2.6.3",
     "should": "^11.1.1",
     "socket.io": "^1.5.1"
   },
@@ -32,6 +36,6 @@
     "mocha": "^3.1.2"
   },
   "scripts": {
-      "test": "mocha --recursive"
+    "test": "mocha --recursive"
   }
 }
