@@ -28,7 +28,7 @@ module.exports =
   
       bindSocketEvents();
       return g;
-    };
+    }
   
     function bindSocketEvents() {
       g.io.sockets.on('connection', function onConnection(socket) {
@@ -58,7 +58,7 @@ module.exports =
         socket.on('mockGame', onMockGame);
         socket.on('getScore', onGetScore);
       });
-    };
+    }
   
     function onMockGame(data) {
       var game = gameById(this.id);
@@ -73,13 +73,13 @@ module.exports =
       game.incrementLevel();
   
       this.emit('gameMocked');
-    };
+    }
   
     function onGetScore(player) {
-      var self = this
-      g.leaderboard.score(player.name, function(err, score) {
-        self.emit('score', {score: score})
-      })
+      var self = this;
+      g.leaderboard.score(player.name, function (err, score) {
+        self.emit('score', {score: score});
+      });
     }
   
     function onStartInvest() {
@@ -127,7 +127,9 @@ module.exports =
       }
       var InvestPhase = game.getPhase();
   
-      if(game.getPhaseName() != 'invest') return;
+      if (game.getPhaseName() !== 'invest') { 
+        return 
+      };
   
       var success = InvestPhase.buyStock();
       if(success) {

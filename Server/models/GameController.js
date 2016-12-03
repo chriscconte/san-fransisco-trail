@@ -2,7 +2,7 @@
   var InvestPhase = require('./InvestPhase');
   var HuntPhase = require('./HuntPhase');
   
-  var GameController = function(config) {   
+  var GameController = function (config) {
     
     var id       = config.id || '';
     var name     = config.name || 'Player';
@@ -16,80 +16,78 @@
     
     var gc = { };
     
-    gc.getId = function() {
+    gc.getId = function () {
       return id;
     };
     
-    gc.getScore = function() {
+    gc.getScore = function () {
       return score;
     };
     
-    gc.getLevel = function() {
+    gc.getLevel = function () {
       return level;
     };
     
-    gc.getWallet = function() {
+    gc.getWallet = function () {
       return wallet;
     };
     
-    gc.setScore = function(newScore) {
+    gc.setScore = function (newScore) {
       score = newScore;
       return score;
-    }
-    
-    gc.die = function() {
-      isDead = true;
-    }
-    
-    gc.setWallet = function(value) {
-      return wallet = value;
     };
     
-    gc.incrementLevel = function() {
+    gc.die = function () {
+      isDead = true;
+    };
+    
+    gc.setWallet = function (value) {
+      wallet = value;
+      return wallet;
+    };
+    
+    gc.incrementLevel = function () {
       level += 1;
     };
     
-    gc.getName = function() {
+    gc.getName = function () {
       return name;
     };
     
-    gc.setName = function(data) {
+    gc.setName = function (data) {
       name = data.name;
     };
     
-    gc.setPhase = function(data) {
+    gc.setPhase = function (data) {
       
       if (data === 'invest') {
         phase = new InvestPhase(
           {level: level, wallet: wallet, score: score}
         );
         phaseName = 'invest';
-      }
-      else if (data === 'hunt') { 
+      } else if (data === 'hunt') {
         phase = new HuntPhase(
           {level: level, wallet: wallet, score: score}
         );
         phaseName = 'hunt';
-      }
-      else {
+      } else {
         phase = null;
         phaseName = '';
       }
     };
     
-    gc.getPhase = function() {
+    gc.getPhase = function () {
       return phase;
     };
     
-    gc.getPhaseName = function() {
+    gc.getPhaseName = function () {
       return phaseName;
-    }
+    };
     
-    gc.getDataToPost = function() {
+    gc.getDataToPost = function () {
       if (isDead) {
         return {name: name, score: score};
-      }
-      else {
+      } else {
         return null;
       }
     };
@@ -99,4 +97,4 @@
 
   module.exports = GameController;
 
-})();
+}());
