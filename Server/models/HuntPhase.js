@@ -1,6 +1,7 @@
-(function() {
+(function () {
 
-  var HuntPhase = function(config) {
+  'use strict';
+  var HuntPhase = function (config) {
     
     var wallet = config.wallet;
     var level = config.level;
@@ -47,44 +48,41 @@
     
     var ip = {};
     
-    ip.getWallet = function() {
+    ip.getWallet = function () {
       return config.wallet;
     };
     
-    ip.getWord = function() {
+    ip.getWord = function () {
       return currentWord;
     };
     
-    ip.isAdvance = function() {
+    ip.isAdvance = function () {
       return advance;
     };
     
-    ip.isDead = function() {
+    ip.isDead = function () {
       return dead;
     };
     
-    ip.die = function() {
+    ip.die = function () {
       dead = true;
-    }
+    };
     
-    ip.getOpportunityToNext = function() {
+    ip.getOpportunityToNext = function () {
       return opportunityToNext;
     };
     
-    ip.isCorrect = function(resp) {
-      console.log("guess   "+ resp.guess+ "\n Word   "+currentWord.word);
-      
-      if(resp.guess === currentWord.word) {
+    ip.isCorrect = function (resp) {
+      if (resp.guess === currentWord.word) {
         opportunityToNext -= currentWord.score;
         config.score += currentWord.score;
-        if(opportunityToNext <= 0) {
+        if (opportunityToNext <= 0) {
           advance = true;
         }
         return currentWord.score;
-      }
-      else {
+      } else {
         config.wallet -= currentWord.score * 100;
-        if(config.wallet <= 0){
+        if (config.wallet <= 0) {
           config.wallet = 0;
           dead = true;
         }
@@ -92,19 +90,19 @@
       }
     };
     
-    ip.newWord = function() {
-      a = Math.floor(Math.random()*dictionary.length);
+    ip.newWord = function () {
+      var a = Math.floor(Math.random() * dictionary.length);
       currentWord = dictionary[a];
     };
     
-    ip.startHunt = function() {
+    ip.startHunt = function () {
       begin = true;
     };
     
-    return ip;  
+    return ip;
     
   };
 
   module.exports = HuntPhase;
 
-})();
+}());
