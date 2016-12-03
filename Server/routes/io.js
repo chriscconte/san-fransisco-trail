@@ -53,9 +53,33 @@ module.exports =
       
       socket.on('postScore', onPostScore);
       socket.on('getLeaderboard', onGetLeaderboard);
+      
+      socket.on('mockGame', onMockGame);
+      socket.on('getScore', onGetScore);
     });
   };
 
+  function onMockGame(data) {
+    var game = gameById(this.id);
+    
+    if (!game) {
+      util.log("game not found: " + this.id);
+      return;
+    }
+    
+    game.setScore(50);
+    game.incrementLevel();
+    game.incrementLevel();
+    
+    this.emit('gameMocked');
+  };
+  
+  function onGetScore(player) {
+    var self = this
+    g.leaderboard.score(player.name, function(err, score) {
+      self.emit('score', {score: score})
+    })
+  }
   
   function onStartInvest() {
     // TODO: Move to InvestPhase
@@ -240,7 +264,7 @@ module.exports =
     if (toPost) {
       g.leaderboard.add(data.name, toPost.score);
     }
-  }
+  };
   
   function onGetLeaderboard(resp) {
     g.leaderboard.list(resp.page, function(err, list) {
@@ -249,7 +273,7 @@ module.exports =
       }
       socket.emit('leaderboard', {list: list});
     });
-  }
+  };
   
   function onSetPlayerName(data) {
     console.log('onSetPlayerName', data);

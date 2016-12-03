@@ -1,6 +1,10 @@
 var should = require('should');
 var io = require('socket.io-client'),
     server = require('../index.js');
+var assert = require('assert');
+var async = require('async');
+var redis = require('redis');
+var LB = require('leaderboard');
 
 var socketURL = 'http://localhost:8000';
 
@@ -12,6 +16,22 @@ var options ={
 var player1 = {'name':'Tom'};
 var player2 = {'name':'Sally'};
 var player3 = {'name':'Dana'};
+
+// Constants
+var DBINDEX = 15;
+var PAGESIZE = 5;
+
+// Before all suites
+before(function(done) {
+  // Initialize a subject leaderboard before all suites
+  this.board = new LB('general', {pageSize: PAGESIZE}, {db: DBINDEX});
+
+  // Creating connection to the redis and 
+  // changing the current selected database
+  this.client = redis.createClient();
+  this.client.select(DBINDEX, done);
+});
+
   
 describe("Game Server",function(){
 
@@ -89,7 +109,7 @@ describe("Game Server",function(){
   });
     /* Test 4 - User Sells Stock. */
   it('Should be not be able to sell stock', function(done){
-     var client = io.connect(socketURL, options);
+    var client = io.connect(socketURL, options);
 
     client.on('connected',function(data){
       client.emit('startInvest', player1);
@@ -101,8 +121,88 @@ describe("Game Server",function(){
       client.on('sellStock', function(data){
         data.success.should.equal(false);
         done(); 
+        return;
       })
     });
+  });
+  
+  /* test start hunt */
+  
+  it('Should begin to receive words after start hunt', function(done){
+     var client = io.connect(socketURL, options);
+
+    client.on('connected',function(data){
+      client.emit('startHunt', player1);
+    });
+
+    client.on('newWord',function(data){
+      done(); 
+    });
+  });
+  
+  /*
+  incorrect word
+  */
+  it('Should to receive an incorrect after guessing wrong', function(done){
+    var client = io.connect(socketURL, options);
+
+    client.on('connected',function(data){
+      client.emit('startHunt', player1);
+    });
+  
+    client.on('newWord',function(data){
+      client.emit('testWord', {guess: ''});
+    });
+        
+    client.on('incorrect', function(resp) {
+       done(); 
+    });
+    
+  });
+  
+  /*
+  change phase
+  */
+  it('Should to receive an correct after guessing right', function(done){
+    var client = io.connect(socketURL, options);
+
+    client.on('connected',function(data){
+      client.emit('startHunt', player1);
+    });
+  
+    client.on('newWord',function(data){
+      client.emit('testWord', {guess: data.word.word});
+    });
+        
+    client.on('correct', function(resp) {
+       done(); 
+    });
+    
+  });
+  
+  
+  /*
+  post correct score
+  */
+  it('Should to Post the correct score to the leaderboard', function(done){
+    var client = io.connect(socketURL, options);
+
+    client.on('connected',function(data){
+      client.emit('mockGame');
+    });
+  
+    client.on('gameMocked',function(data){
+      client.emit('postScore', player1);
+      
+    });
+        
+    client.emit('getScore', player1);
+    
+    client.on('score', function(resp) {
+      resp.score.should.equal(50);
+      done(); 
+    });
+    
   });
   
 });
