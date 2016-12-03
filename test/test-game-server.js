@@ -121,7 +121,6 @@ describe("Game Server",function(){
       client.on('sellStock', function(data){
         data.success.should.equal(false);
         done(); 
-        return;
       })
     });
   });
@@ -135,7 +134,7 @@ describe("Game Server",function(){
       client.emit('startHunt', player1);
     });
 
-    client.on('newWord',function(data){
+    client.on('begin',function(data){
       done(); 
     });
   });
