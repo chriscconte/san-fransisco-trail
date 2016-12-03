@@ -11,6 +11,7 @@
     var level = 1;
     var wallet = 5000;
     var phase = null;
+    var phaseName = '';
     var isDead = false;
     
     var gc = { };
@@ -62,20 +63,27 @@
         phase = new InvestPhase(
           {level: level, wallet: wallet, score: score}
         );
+        phaseName = 'invest';
       }
       else if (data === 'hunt') { 
         phase = new HuntPhase(
           {level: level, wallet: wallet, score: score}
         );
+        phaseName = 'hunt';
       }
       else {
         phase = null;
+        phaseName = '';
       }
     };
     
     gc.getPhase = function() {
       return phase;
     };
+    
+    gc.getPhaseName = function() {
+      return phaseName;
+    }
     
     gc.getDataToPost = function() {
       if (isDead) {

@@ -6,7 +6,7 @@
     var ctrl = this;
     
     $scope.player = ctrl.player;
-    $scope.walletTemp =  ctrl.player.wallet;
+    $scope.walletInit =  ctrl.player.wallet;
     $scope.stockCount = 0;
     $scope.currentPrice = null;
     $scope.stockPrice = [];
@@ -61,13 +61,12 @@
     });
     
     socket.on('endInvest', function(resp) {
-      $scope.walletTemp = resp.wallet;
+      ctrl.player.wallet = resp.wallet;
       $scope.finished = true;
     });
     
     $scope.finishInvest = function() {
       // socket.emit('continueToHunt');
-      ctrl.player.wallet = $scope.walletTemp;
       ctrl.player.mode = 2;
     };
     
@@ -90,7 +89,8 @@
       }
       
       $scope.stockCount = resp.stockCount;
-      $scope.walletTemp = resp.wallet;
+      ctrl.player.wallet = resp.wallet;
+      $scope.$ctrl.player.wallet = resp.wallet;
     });
     
     $scope.buyStock = function () {
@@ -109,7 +109,8 @@
       }
       ctrl.player.score = resp.score;
       $scope.stockCount = resp.stockCount;
-      $scope.walletTemp = resp.wallet;
+      ctrl.player.wallet = resp.wallet;
+      $scope.$ctrl.player.wallet = resp.wallet;
     });
     
     $scope.sellStock = function () {

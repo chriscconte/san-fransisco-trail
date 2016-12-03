@@ -14,12 +14,13 @@
     $scope.timer = 100;
     
     $scope.startHunt = function () {
-      socket.emit('startHunt', {level: 1});
+      socket.emit('startHunt');
     };
     
     $scope.testWord = function() {
       socket.emit('testWord', {guess: $scope.guess});
       $scope.guess = '';
+      $scope.currentWord = null;
     };
     $scope.advanceToInvest = function() {
       $scope.$ctrl.player.level++;
@@ -36,16 +37,23 @@
     });
     socket.on('newWord', function(resp){
       ctrl = this;
-      ctrl.wordTimer = 100;
+      /* ctrl.wordTimer = 100;
       $interval(function() {
         ctrl.wordTimer -= 1;
         $scope.timer = ctrl.wordTimer;
+        
+        if($scope.timer) {
+          $scope.currentWord = null;
+        }
       }, resp.timer / 100.0, 100);
+      */
+      
       $scope.currentWord = resp.word;
+      $scope.$ctrl.player.wallet = resp.wallet;
     });
     socket.on('correct', function(resp) {
-      $scope.$ctrl.player.score += resp.score;
-      $scope.opportunityGained += resp.score;
+      $scope.$ctrl.player.score = resp.score;
+      $scope.opportunityGained += resp.gain;
     });
     socket.on('incorrect', function(resp) {
       $scope.$ctrl.player.wallet = resp.wallet;

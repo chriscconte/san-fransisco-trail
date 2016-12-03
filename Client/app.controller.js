@@ -36,8 +36,11 @@
         ctrl.leaderboard.concat(data.leaderboard);
       });
     
+      ctrl.posted = false;
+    
       ctrl.postScore = function () {
-         socket.emit('postScore');
+        socket.emit('postScore', {name: ctrl.player.name});
+        ctrl.posted = true; 
       };
     });
 }());

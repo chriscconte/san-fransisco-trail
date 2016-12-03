@@ -5,7 +5,7 @@
     var wallet = config.wallet;
     var level = config.level;
     
-    var opportunityToNext = Math.pow(100,level);
+    var opportunityToNext = 100;
     var dead = false;
     var begin = false;
     var advance = false;
@@ -62,6 +62,10 @@
     ip.isDead = function() {
       return dead;
     };
+    
+    ip.die = function() {
+      dead = true;
+    }
     
     ip.getOpportunityToNext = function() {
       return opportunityToNext;

@@ -2,6 +2,8 @@ module.exports =
 (function(app, io) {
   var util = require('util');
   var GameController = require('./../models/GameController');
+  var IP = require('./../models/InvestPhase');
+  var HP = require('./../models/HuntPhase');
   
   var assert = require('assert');
   var async = require('async');
@@ -31,18 +33,11 @@ module.exports =
     g.io.sockets.on('connection', function onConnection(socket) {
       util.log("Client has connected: " + socket.id);
       
-      async.parallel([
-          function(cb) { g.leaderboard.add('member1', 10, cb); },
-          function(cb) { g.leaderboard.add('member2', 20, cb); }
-        ], function(err, results) {
-        util.log(results);
-        g.leaderboard.list(function(err, list) {
-          util.log(list);
-          socket.emit('connected', { 
-            id: socket.id,
-            leaderboard: list
-          });
-        })
+      g.leaderboard.list(function(err, list) {
+        socket.emit('connected', { 
+          id: socket.id,
+          leaderboard: list
+        });
       });
 
       var game = new GameController({ id: socket.id });
@@ -64,7 +59,7 @@ module.exports =
   
   function onStartInvest() {
     // TODO: Move to InvestPhase
-    var TIME_MS = 3.0e3;
+    var TIME_MS = 3.0e4;
     var TIME_INTERVAL_MS = 100.0;
     var numPoints = TIME_MS / TIME_INTERVAL_MS;
     var self = this;
@@ -92,9 +87,8 @@ module.exports =
     setTimeout(
       function() { 
         clearInterval(addNewPointsInterval);
-        game.wallet = InvestPhase.endInvest();
-        
-        self.emit('endInvest', {wallet: game.wallet});
+        game.setWallet(InvestPhase.endInvest());
+        self.emit('endInvest', {wallet: game.getWallet()});
       }, 
       TIME_MS + 200.0
     );
@@ -108,11 +102,18 @@ module.exports =
     }
     var InvestPhase = game.getPhase();
     
+    if(game.getPhaseName() != 'invest') return;
+    
+    var success = InvestPhase.buyStock();
+    if(success) {
+      game.setScore(game.getScore() + 1);
+    }
+    
     this.emit('buyStock', {
-      success: InvestPhase.buyStock(),
+      success: success,
       wallet: game.setWallet(InvestPhase.getWallet()),
       stockCount: InvestPhase.getStockCount(),
-      score: game.setScore(InvestPhase.getScore())
+      score: game.getScore()
     });
   };
   
@@ -122,14 +123,19 @@ module.exports =
       util.log("game not found: " + this.id);
       return;
     }
+    if(game.getPhaseName() != 'invest') return;
+    
     var InvestPhase = game.getPhase();
+    
     var success = InvestPhase.sellStock();
-    console.log(game.score);
+    if(success) {
+      game.setScore(game.getScore() + 1);
+    }
     this.emit('sellStock', {
       success: success,
       wallet: game.setWallet(InvestPhase.getWallet()),
       stockCount: InvestPhase.getStockCount(),
-      score: game.setScore(InvestPhase.getScore())
+      score: game.getScore()
     });
   };
   
@@ -138,9 +144,6 @@ module.exports =
     
     var self = this;
     
-    var TIME_MS = 3.0e4;
-    var TIME_INTERVAL_MS = 5.0e3;
-    
     var game = gameById(this.id);
     
     if (!game) {
@@ -148,26 +151,38 @@ module.exports =
       return;
     }
     
+    var TIME_INTERVAL_MS = 5.0e3 - (game.getLevel() * 2.0e2);
+    
     game.setPhase('hunt');
     var HuntPhase = game.getPhase();
     HuntPhase.startHunt();
+    
     self.emit('begin', {
       words: HuntPhase.getWord(),
       opportunityToNext: HuntPhase.getOpportunityToNext()
     });
     
+    var counter = 0;
+    
     var addNewPointsInterval = setInterval(
       function (HuntPhase) {
-        if(HuntPhase.isDead() || HuntPhase.isAdvance()) {
+        if(HuntPhase.isDead() || game.getWallet() <= 0 ) {
+          self.emit('dead');
+          clearInterval(addNewPointsInterval);
+          return;
+        }
+        if(HuntPhase.isAdvance()) {
           clearInterval(addNewPointsInterval);
           return;
         }
         HuntPhase.newWord();
         resp = {
           word: HuntPhase.getWord(), 
-          timer: TIME_INTERVAL_MS
+          timer: TIME_INTERVAL_MS,
+          wallet: game.setWallet(game.getWallet() - game.getLevel() * 1.0e2)
         };
         self.emit('newWord', resp);
+        counter++;
       },
       TIME_INTERVAL_MS,
       HuntPhase
@@ -183,6 +198,7 @@ module.exports =
       util.log("game not found: " + this.id);
       return;
     }
+    if(game.getPhaseName() != 'hunt') return;
     
     var HuntPhase = game.getPhase();
     // TODO: see if correct phase
@@ -190,8 +206,13 @@ module.exports =
     if(!HuntPhase.isCorrect(resp)) {
       this.emit('incorrect', {wallet: game.setWallet(HuntPhase.getWallet())});
     }
+    
     else {
-      this.emit('correct', {score: HuntPhase.getWord().score})
+      game.setScore(game.getScore() +  HuntPhase.getWord().score);
+      this.emit('correct', {
+        score: game.getScore(),
+        gain: HuntPhase.getWord().score
+      });
     }
     if(HuntPhase.isDead()){
         this.emit('dead');
@@ -205,7 +226,7 @@ module.exports =
     }
   };
   
-  function onPostScore() {
+  function onPostScore(data) {
     console.log("test");
         
     var game = gameById(this.id);
@@ -217,7 +238,7 @@ module.exports =
     var toPost = game.getDataToPost();
     console.log(toPost);
     if (toPost) {
-      g.leaderboard.add(toPost.name, toPost.score);
+      g.leaderboard.add(data.name, toPost.score);
     }
   }
   

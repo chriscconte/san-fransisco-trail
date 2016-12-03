@@ -35,13 +35,13 @@
   <div ng-app="myApp" ng-controller="myCtrl as ctrl">
     <div class="container bs-docs-container">
       <div class="page-header">
-      <div class="title">         
-        <img class="logo" src="images/logo.png">
-        JP Moregon Trail 
+      <div class="title">
+        <circle></circle>
+        <img class="logo img-circle" src="images/logo.png">
+        San Francisco Trail
       </div> 
         <nav class="navbar navbar-default">
           <div class="container-fluid">
-          <p class="navbar-text">Player: {{ctrl.player.name}}</p>
           <p class="navbar-text">Wallet: {{ctrl.player.wallet}}</p>
           <p class="navbar-text">Level: {{ctrl.player.level}}</p>
           <p class="navbar-text">Score: {{ctrl.player.score}}</p>
@@ -91,7 +91,10 @@
             <div class="input-group">
               <input type="text" ng-model="ctrl.player.name" class="form-control">
             </div>
-            <button ng-click="ctrl.postScore()"/>
+            <button ng-click="ctrl.postScore()" ng-disabled="ctrl.posted"/>
+            <div ng-hide="!ctrl.posted">
+               Posted! Reload the page to play again.
+            </div>
           </div>
         </div>
         <div ng-switch-default></div>

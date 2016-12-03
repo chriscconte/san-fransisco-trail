@@ -11,7 +11,7 @@
   <div class="game-message" ng-if="started && finished">
     
       <div>
-        You earned ${{walletTemp - player.wallet}}
+        You earned ${{player.wallet - walletInit}}
       </div>
       <button type="button" class="btn btn-primary btn-lg" ng-click="finishInvest()">
             Continue
@@ -67,7 +67,7 @@
               <div class="panel panel-default">
           <div class="panel-heading">Wallet: </div>
             <div class="panel-body">
-              {{ walletTemp }}
+              {{ player.wallet }}
             </div>
         </div>
       </div>
