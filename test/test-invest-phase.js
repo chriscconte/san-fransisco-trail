@@ -44,10 +44,12 @@ describe('InvestPhase', function() {
       var invest = new InvestPhase(config);
       
     });
+  });
     
   describe('BuyStock', function(done) {
+      
     
-  })
+  });
   
 
 });
