@@ -521,7 +521,7 @@ describe('Leaderboard', function() {
 
   });
 
-describe('"at" method', function() {
+  describe('"at" method', function() {
     // Empty database before the suite
     before(function(done) {
       this.client.flushdb(done);

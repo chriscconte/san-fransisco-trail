@@ -98,7 +98,11 @@ module.exports =
   
       game.setPhase('invest');
       var InvestPhase = game.getPhase();
-      InvestPhase.startInvest();
+      listener = InvestPhase.startInvest();
+      
+      listener.then(function(resp) {
+        console.log(resp);
+      });
       self.emit('begin', {price: InvestPhase.getStockPrice()});
   
       var addNewPointsInterval = setInterval(
