@@ -174,6 +174,7 @@ describe("Game Server",function(){
     });
   
     client.on('begin',function(data){
+      debugger;
       client.emit('testWord', {guess: data.word.word});
     });
         

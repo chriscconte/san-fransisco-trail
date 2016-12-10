@@ -27,7 +27,7 @@ describe('Leaderboard', function() {
 
     it('should have possibility to take RedisClient instance', function(done) {
       var client = redis.createClient();
-      client.select(DBINDEX + 1);
+      client.select(DBINDEX - 1);
       client.flushdb(function() {
 
         var board1 = new LB('__redis__', null, client);

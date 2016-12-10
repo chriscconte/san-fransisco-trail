@@ -182,7 +182,7 @@ module.exports =
     HuntPhase.startHunt();
     
     self.emit('begin', {
-      words: HuntPhase.getWord(),
+      word: HuntPhase.getWord(),
       opportunityToNext: HuntPhase.getOpportunityToNext()
     });
     

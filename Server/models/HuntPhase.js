@@ -30,11 +30,6 @@
     
     var ip = {};
     
-    ip.clearData = function() {
-      lineReader.close();
-      dictionary = [];
-    }
-    
     ip.getWallet = function () {
       return config.wallet;
     };
@@ -92,6 +87,7 @@
     };
     
     ip.startHunt = function () {
+      ip.newWord();
       begin = true;
     };
     
