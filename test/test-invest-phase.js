@@ -132,7 +132,35 @@ describe('InvestPhase', function() {
     describe('startInvest', function(done) {
       
         it('should set begin to true', function(done){
+            var config = {
+                score: 0,
+                wallet: 5000,
+                level: 1
+              };
+            var investPhase = new InvestPhase(config);
+            investPhase.startInvest();
+            
+            assert.deepEqual(investPhase.isBegin(), true);
+            done();
 
+
+        });
+
+  });
+    
+    describe('endInvest', function(done) {
+      
+        it('should set finished to false', function(done){
+            var config = {
+                score: 0,
+                wallet: 5000,
+                level: 1
+              };
+            var investPhase = new InvestPhase(config);
+            investPhase.startInvest();
+            
+            assert.deepEqual(investPhase.isFinished(), false);
+            done();
 
 
         });

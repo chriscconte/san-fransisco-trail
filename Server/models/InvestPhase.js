@@ -16,6 +16,12 @@
     ip.getWallet = function () {
       return config.wallet;
     };
+    ip.isBegin = function () {
+      return begin;
+    };
+    ip.isFinished = function () {
+      return finished;
+    };
 
     ip.getScore = function () {
       return config.score;
