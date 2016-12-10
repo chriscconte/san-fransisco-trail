@@ -41,10 +41,7 @@ describe('InvestPhase', function() {
       done();
     });
     
-    it('should properly instantiate with default properties.', function(done){
-      var invest = new InvestPhase(config);
-      
-    });
+
   });
     
   describe('BuyStock', function(done) {
