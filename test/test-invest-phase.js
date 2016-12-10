@@ -53,21 +53,90 @@ describe('InvestPhase', function() {
         var investPhase = this.investPhase;
         investPhase.startInvest();
         investPhase.buyStock();
-         assert.deepEqual(investPhase.getStockCount(), 1);
-        investPhase.end
+        assert.deepEqual(investPhase.getStockCount(), 1);
         done();
 
       
     });
     it('should not be able to buy more stocks than wallet amount allows', function(done){
-
+        var config = {
+            score: 0,
+            wallet: 0,
+            level: 1
+          };
+        var investPhase = new InvestPhase(config);
+        
+        investPhase.startInvest();
+        
+        assert.deepEqual(investPhase.buyStock(), false);
         done();
-
       
     });
     
   });
-  
+    
+    describe('SellStock', function(done) {
+      
+    it('should properly sell a stock', function(done){
+        var config = {
+            score: 0,
+            wallet: 5000,
+            level: 1
+          };
+        var investPhase = new InvestPhase(config);
+        investPhase.startInvest();
+        investPhase.buyStock();
+        assert.deepEqual(investPhase.getStockCount(), 1);
+        investPhase.sellStock();
+        assert.deepEqual(investPhase.getStockCount(), 0);
+        done();
 
+      
+    });
+    it('should not be able to sell more stocks than you have', function(done){
+        var config = {
+            score: 0,
+            wallet: 5000,
+            level: 1
+          };
+        var investPhase = new InvestPhase(config);
+        investPhase.startInvest();
+        investPhase.buyStock();
+        assert.deepEqual(investPhase.getStockCount(), 1);
+        investPhase.sellStock();
+        assert.deepEqual(investPhase.sellStock(), false);
+        done();
+      
+    });
+    
+  });
+    describe('addPoint', function(done) {
+      
+        it('should set addPoint shoudl return new stockPrice b/t 0-1000', function(done){
+            var config = {
+                score: 0,
+                wallet: 5000,
+                level: 1
+              };
+            var investPhase = new InvestPhase(config);
+            investPhase.startInvest();
+            investPhase.addPoint();
+            assert.deepEqual(investPhase.addPoint(), investPhase.getStockPrice());
+            done();
+
+
+        });
+
+  });
+
+    describe('startInvest', function(done) {
+      
+        it('should set begin to true', function(done){
+
+
+
+        });
+
+  });
 });
       
