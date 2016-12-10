@@ -61,6 +61,7 @@
     "escape-string-regexp": "^1.0.5",
     "etag": "^1.7.0",
     "express": "^4.14.0",
+    "filereader": "^0.10.3",
     "finalhandler": "^0.5.1",
     "forwarded": "^0.1.0",
     "fresh": "^0.3.0",
