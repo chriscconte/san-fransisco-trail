@@ -119,13 +119,17 @@ describe("Game Server",function(){
       client.emit('sellStock');
       
       client.on('sellStock', function(data){
+        
+        /* If this client doesn't disconnect it will interfere 
+        with the next test */
+        client.disconnect();
         data.success.should.equal(false);
         done(); 
       })
     });
   });
   
-  /* test start hunt */
+  /* Test 4: start hunt */
   
   it('Should begin to receive words after start hunt', function(done){
      var client = io.connect(socketURL, options);
@@ -149,7 +153,7 @@ describe("Game Server",function(){
       client.emit('startHunt', player1);
     });
   
-    client.on('newWord',function(data){
+    client.on('begin',function(data){
       client.emit('testWord', {guess: ''});
     });
         
@@ -169,37 +173,12 @@ describe("Game Server",function(){
       client.emit('startHunt', player1);
     });
   
-    client.on('newWord',function(data){
+    client.on('begin',function(data){
       client.emit('testWord', {guess: data.word.word});
     });
         
     client.on('correct', function(resp) {
        done(); 
-    });
-    
-  });
-  
-  
-  /*
-  post correct score
-  */
-  it('Should to Post the correct score to the leaderboard', function(done){
-    var client = io.connect(socketURL, options);
-
-    client.on('connected',function(data){
-      client.emit('mockGame');
-    });
-  
-    client.on('gameMocked',function(data){
-      client.emit('postScore', player1);
-      
-    });
-        
-    client.emit('getScore', player1);
-    
-    client.on('score', function(resp) {
-      resp.score.should.equal(50);
-      done(); 
     });
     
   });

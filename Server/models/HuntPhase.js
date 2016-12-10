@@ -3,6 +3,11 @@
   'use strict';
   var HuntPhase = function (config) {
     
+    var fs = require('fs');
+    const path = require('path');
+    
+    
+    
     var wallet = config.wallet;
     var level = config.level;
     
@@ -10,43 +15,25 @@
     var dead = false;
     var begin = false;
     var advance = false;
-    var dictionary = [
-      {
-        word: "att",
-        score: 10
-      },
-      {
-        word: "verizon",
-        score: 20
-      },
-      {
-        word: "apple",
-        score: 10
-      },
-      {
-        word: "amazon",
-        score: 10
-      },
-      {
-        word: "microsoft",
-        score: 20
-      },
-      {
-        word: "alphabet",
-        score: 20
-      },
-      {
-        word: "twitter",
-        score: 15
-      },
-      {
-        word: "comcast",
-        score: 10
-      }
-    ];
+    var dictionary = [];
+    var companies = fs.readFileSync('Server/company_names.txt').toString().split('\r');
+    
+    for(var i = 0; i < companies.length; i++) {
+      dictionary.push({
+        word: companies[i],
+        score: companies[i].length * 2
+      })
+    }
+    
+    var alreadyUsed = [0];
     var currentWord = dictionary[0];
     
     var ip = {};
+    
+    ip.clearData = function() {
+      lineReader.close();
+      dictionary = [];
+    }
     
     ip.getWallet = function () {
       return config.wallet;
@@ -91,12 +78,25 @@
     };
     
     ip.newWord = function () {
-      var a = Math.floor(Math.random() * dictionary.length);
+      var a;
+      do {
+        a = Math.floor(Math.random() * dictionary.length);
+      } while (alreadyUsed.indexOf(a) !== -1);
+      
+      alreadyUsed.push(a);
+      
+      if(alreadyUsed.length === dictionary.length) {
+        alreadyUsed = [];
+      }
       currentWord = dictionary[a];
     };
     
     ip.startHunt = function () {
       begin = true;
+    };
+    
+    ip.isBegin = function () {
+      return begin;
     };
     
     return ip;
