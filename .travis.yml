@@ -3,3 +3,5 @@ node_js:
   - 6.9.2
 install:
   - npm install
+services:
+  - redis-server
