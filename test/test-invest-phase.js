@@ -41,10 +41,7 @@ describe('InvestPhase', function() {
       done();
     });
     
-    it('should properly instantiate with default properties.', function(done){
-      var invest = new InvestPhase(config);
-      
-    });
+
   });
     
   describe('BuyStock', function(done) {
@@ -132,11 +129,80 @@ describe('InvestPhase', function() {
     describe('startInvest', function(done) {
       
         it('should set begin to true', function(done){
-
+            var config = {
+                score: 0,
+                wallet: 5000,
+                level: 1
+              };
+            var investPhase = new InvestPhase(config);
+            investPhase.startInvest();
+            
+            assert.deepEqual(investPhase.isBegin(), true);
+            done();
 
 
         });
 
   });
+    
+    describe('endInvest', function(done) {
+      
+        it('should set finished to false', function(done){
+            var config = {
+                score: 0,
+                wallet: 5000,
+                level: 1
+              };
+            var investPhase = new InvestPhase(config);
+            investPhase.startInvest();
+            
+            assert.deepEqual(investPhase.isFinished(), false);
+            done();
+
+
+        });
+
+  });
+    describe('Wallet Deduction', function(done) {
+      
+        it('should decrement wallet by stockPrice', function(done){
+            var config = {
+                score: 0,
+                wallet: 5000,
+                level: 1
+              };
+            var investPhase = new InvestPhase(config);
+            investPhase.startInvest();
+            
+            investPhase.buyStock();
+            
+            assert.deepEqual(investPhase.getWallet() < 5000,true);
+            done();
+
+
+        });
+
+  });
+    describe('Wallet Addtion', function(done) {
+      
+        it('should increment wallet by stockPrice after decrementing by stockPrice', function(done){
+            var config = {
+                score: 0,
+                wallet: 5000,
+                level: 1
+              };
+            var investPhase = new InvestPhase(config);
+            investPhase.startInvest();
+            investPhase.buyStock();
+            investPhase.sellStock();
+            
+            assert.deepEqual(investPhase.getWallet(), 5000);
+            done();
+
+
+        });
+
+  });
+    
 });
       
