@@ -33,6 +33,10 @@ npm install -g
 
 npm test
 
+#### coverage 
+
+npm run cover
+
 ### Framework Versions
 AngularJS 1.5.8
 
