@@ -1,5 +1,7 @@
 # san-fransisco-trail
 
+[![Coverage Status](https://coveralls.io/repos/github/chriscconte/san-fransisco-trail/badge.svg)](https://coveralls.io/github/chriscconte/san-fransisco-trail)
+
 ### Team SF Trail
 Members:
 * Kaveh Issapour
