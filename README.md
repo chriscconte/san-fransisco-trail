@@ -45,4 +45,10 @@ Bootstrap 3.3.7
 ### Style Guide
 https://github.com/johnpapa/angular-styleguide
 
-### More coming soon!
+### Travis CI
+
+https://travis-ci.org/chriscconte/san-fransisco-trail
+
+### Coveralls Coverage Report
+
+https://coveralls.io/github/chriscconte/san-fransisco-trail
