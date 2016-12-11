@@ -8,7 +8,7 @@ var LB = require('leaderboard');
 
 var socketURL = 'http://localhost:8000';
 
-var options ={
+var options = {
   transports: ['websocket'],
   'force new connection': true
 };
