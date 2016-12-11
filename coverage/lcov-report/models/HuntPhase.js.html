@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for models/HuntPhase.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">models/</a> HuntPhase.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">5.36% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>3/56</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/8</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">8.33% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/12</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">5.36% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>3/56</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">(function () {
+&nbsp;
+  'use strict';
+  var HuntPhase = <span class="fstat-no" title="function not covered" >function (config) {</span>
+    
+<span class="cstat-no" title="statement not covered" >    var fs = require('fs');</span>
+<span class="cstat-no" title="statement not covered" >    const path = require('path');</span>
+    
+    
+    
+<span class="cstat-no" title="statement not covered" >    var wallet = config.wallet;</span>
+<span class="cstat-no" title="statement not covered" >    var level = config.level;</span>
+    
+<span class="cstat-no" title="statement not covered" >    var opportunityToNext = 100;</span>
+<span class="cstat-no" title="statement not covered" >    var dead = false;</span>
+<span class="cstat-no" title="statement not covered" >    var begin = false;</span>
+<span class="cstat-no" title="statement not covered" >    var advance = false;</span>
+<span class="cstat-no" title="statement not covered" >    var dictionary = [];</span>
+<span class="cstat-no" title="statement not covered" >    var companies = fs.readFileSync('Server/company_names.txt').toString().split('\r');</span>
+    
+<span class="cstat-no" title="statement not covered" >    for(var i = 0; i &lt; companies.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >      dictionary.push({</span>
+        word: companies[i],
+        score: companies[i].length * 2
+      })
+    }
+    
+<span class="cstat-no" title="statement not covered" >    var alreadyUsed = [0];</span>
+<span class="cstat-no" title="statement not covered" >    var currentWord = dictionary[0];</span>
+    
+<span class="cstat-no" title="statement not covered" >    var ip = {};</span>
+    
+<span class="cstat-no" title="statement not covered" >    ip.getWallet = <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >      return config.wallet;</span>
+    };
+    
+<span class="cstat-no" title="statement not covered" >    ip.getWord = <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >      return currentWord;</span>
+    };
+    
+<span class="cstat-no" title="statement not covered" >    ip.isAdvance = <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >      return advance;</span>
+    };
+    
+<span class="cstat-no" title="statement not covered" >    ip.isDead = <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >      return dead;</span>
+    };
+    
+<span class="cstat-no" title="statement not covered" >    ip.die = <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >      dead = true;</span>
+    };
+    
+<span class="cstat-no" title="statement not covered" >    ip.getOpportunityToNext = <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >      return opportunityToNext;</span>
+    };
+    
+<span class="cstat-no" title="statement not covered" >    ip.isCorrect = <span class="fstat-no" title="function not covered" >function (resp) {</span></span>
+<span class="cstat-no" title="statement not covered" >      if (resp.guess === currentWord.word) {</span>
+<span class="cstat-no" title="statement not covered" >        opportunityToNext -= currentWord.score;</span>
+<span class="cstat-no" title="statement not covered" >        config.score += currentWord.score;</span>
+<span class="cstat-no" title="statement not covered" >        if (opportunityToNext &lt;= 0) {</span>
+<span class="cstat-no" title="statement not covered" >          advance = true;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        return currentWord.score;</span>
+      } else {
+<span class="cstat-no" title="statement not covered" >        config.wallet -= currentWord.score * 100;</span>
+<span class="cstat-no" title="statement not covered" >        if (config.wallet &lt;= 0) {</span>
+<span class="cstat-no" title="statement not covered" >          config.wallet = 0;</span>
+<span class="cstat-no" title="statement not covered" >          dead = true;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        return 0;</span>
+      }
+    };
+    
+<span class="cstat-no" title="statement not covered" >    ip.newWord = <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >      var a;</span>
+<span class="cstat-no" title="statement not covered" >      do {</span>
+<span class="cstat-no" title="statement not covered" >        a = Math.floor(Math.random() * dictionary.length);</span>
+      } while (alreadyUsed.indexOf(a) !== -1);
+      
+<span class="cstat-no" title="statement not covered" >      alreadyUsed.push(a);</span>
+      
+<span class="cstat-no" title="statement not covered" >      if(alreadyUsed.length === dictionary.length) {</span>
+<span class="cstat-no" title="statement not covered" >        alreadyUsed = [];</span>
+      }
+<span class="cstat-no" title="statement not covered" >      currentWord = dictionary[a];</span>
+    };
+    
+<span class="cstat-no" title="statement not covered" >    ip.startHunt = <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >      ip.newWord();</span>
+<span class="cstat-no" title="statement not covered" >      begin = true;</span>
+    };
+    
+<span class="cstat-no" title="statement not covered" >    ip.isBegin = <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >      return begin;</span>
+    };
+    
+<span class="cstat-no" title="statement not covered" >    return ip;</span>
+    
+  };
+&nbsp;
+  module.exports = HuntPhase;
+&nbsp;
+}());</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat Dec 10 2016 20:21:22 GMT-0500 (EST)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

@@ -2,10 +2,6 @@ var assert = require('assert');
 var async = require('async');
 var InvestPhase = require('../Server/models/InvestPhase');
 
-// Constants
-var DBINDEX = 15;
-var PAGESIZE = 5;
-
 // Before all suites
 before(function(done) {
 

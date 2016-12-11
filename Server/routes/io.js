@@ -47,39 +47,14 @@ module.exports =
       socket.on('buyStock', onBuyStock);
       socket.on('sellStock', onSellStock);
       socket.on('startInvest', onStartInvest);
+      socket.on('setPlayerName', onSetPlayerName)
       
       socket.on('startHunt', onStartHunt);
       socket.on('testWord', onTestWord);
       
       socket.on('postScore', onPostScore);
-      socket.on('getLeaderboard', onGetLeaderboard);
-      
-      socket.on('mockGame', onMockGame);
-      socket.on('getScore', onGetScore);
     });
   };
-
-  function onMockGame(data) {
-    var game = gameById(this.id);
-    
-    if (!game) {
-      util.log("game not found: " + this.id);
-      return;
-    }
-    
-    game.setScore(50);
-    game.incrementLevel();
-    game.incrementLevel();
-    
-    this.emit('gameMocked');
-  };
-  
-  function onGetScore(player) {
-    var self = this
-    g.leaderboard.score(player.name, function(err, score) {
-      self.emit('score', {score: score})
-    })
-  }
   
   function onStartInvest() {
     // TODO: Move to InvestPhase
@@ -90,6 +65,7 @@ module.exports =
     
     var game = gameById(this.id);
     
+    /* istanbul ignore if */
     if (!game) {
       util.log("game not found: " + this.id);
       return;
@@ -120,6 +96,7 @@ module.exports =
   
   function onBuyStock() {
     var game = gameById(this.id);
+    /* istanbul ignore if  */ 
     if (!game) {
       util.log("game not found: " + this.id);
       return;
@@ -143,6 +120,7 @@ module.exports =
   
   function onSellStock() {
     var game = gameById(this.id);
+    /* istanbul ignore if  */  
     if (!game) {
       util.log("game not found: " + this.id);
       return;
@@ -170,6 +148,7 @@ module.exports =
     
     var game = gameById(this.id);
     
+    /* istanbul ignore if  */ 
     if (!game) {
       util.log("game not found: " + this.id);
       return;
@@ -218,6 +197,7 @@ module.exports =
     
     var game = gameById(this.id);
     
+    /* istanbul ignore if  */  
     if (!game) {
       util.log("game not found: " + this.id);
       return;
@@ -255,6 +235,7 @@ module.exports =
         
     var game = gameById(this.id);
     
+    /* istanbul ignore if  */  
     if (!game) {
       util.log("game not found: " + this.id);
       return;
@@ -266,19 +247,9 @@ module.exports =
     }
   };
   
-  function onGetLeaderboard(resp) {
-    g.leaderboard.list(resp.page, function(err, list) {
-      if(err) {
-        return;
-      }
-      socket.emit('leaderboard', {list: list});
-    });
-  };
-  
   function onSetPlayerName(data) {
-    console.log('onSetPlayerName', data);
-    
     var game = gameById(this.id);
+    /* istanbul ignore if  */ 
     if (!game) {
       util.log("game not found: " + this.id);
       return;
@@ -287,6 +258,7 @@ module.exports =
     game.setName(data);
     
     this.emit('playerDetails', {
+      name: game.getName(),
       id: this.id
     });
   };

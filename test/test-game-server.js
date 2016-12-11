@@ -88,6 +88,22 @@ describe("Game Server",function(){
       }
     });
   });
+  
+  /* User sets name. */
+  it('Should be able to set player name', function(done){
+     var client = io.connect(socketURL, options);
+
+    client.on('connected',function(data){
+      client.emit('setPlayerName', {name: 'john'});
+    });
+
+    client.on('playerDetails',function(data){
+      
+      data.name.should.equal('john');
+      client.disconnect();
+      done(); 
+      })
+    });
 
   /* Test 3 - User Buys Stock. */
   it('Should be able to buy stock', function(done){
@@ -129,6 +145,28 @@ describe("Game Server",function(){
     });
   });
   
+  it('Should be able to sell stock they bought', function(done){
+    var client = io.connect(socketURL, options);
+
+    client.on('connected',function(data){
+      client.emit('startInvest', player1);
+      client.emit('buyStock');
+    });
+
+    client.on('addNewPoint',function(data){
+      client.emit('sellStock');
+      
+      client.on('sellStock', function(data){
+        
+        /* If this client doesn't disconnect it will interfere 
+        with the next test */
+        client.disconnect();
+        data.success.should.equal(true);
+        done(); 
+      })
+    });
+  });
+  
   /* Test 4: start hunt */
   
   it('Should begin to receive words after start hunt', function(done){
@@ -138,10 +176,11 @@ describe("Game Server",function(){
       client.emit('startHunt', player1);
     });
 
-    client.on('begin',function(data){
+    client.on('begin', function(data){
       done(); 
     });
   });
+  
   
   /*
   incorrect word
@@ -174,7 +213,6 @@ describe("Game Server",function(){
     });
   
     client.on('begin',function(data){
-      debugger;
       client.emit('testWord', {guess: data.word.word});
     });
         
@@ -182,6 +220,18 @@ describe("Game Server",function(){
        done(); 
     });
     
+  });
+  
+  // leaderboard
+  it('Should be able to fetch the leaderboard', function(done){
+    var client = io.connect(socketURL, options);
+
+    client.on('connected',function(data){
+      debugger;
+      if(data.leaderboard) {
+        done();
+      }
+    });
   });
   
 });

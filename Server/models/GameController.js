@@ -55,6 +55,7 @@
     };
     
     gc.setName = function (data) {
+
       name = data.name;
     };
     

@@ -1,0 +1,897 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for san-fransisco-trail/Server/routes/io.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">all files</a> / <a href="index.html">san-fransisco-trail/Server/routes/</a> io.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">79.17% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>114/144</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">62.5% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>25/40</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">81.25% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>13/16</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">80.85% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>114/141</span>
+      </div>
+      <div class='fl pad1y'>
+        <span class="strong">14 statements, 7 branches</span>
+        <span class="quiet">Ignored</span>  &nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+    </div>
+  </div>
+  <div class='status-line medium'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">25×</span>
+<span class="cline-any cline-yes">25×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">99×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">module.exports = 
+(function(app, io) {
+  var util = require('util');
+  var GameController = require('./../models/GameController');
+  var IP = require('./../models/InvestPhase');
+  var HP = require('./../models/HuntPhase');
+  
+  var assert = require('assert');
+  var async = require('async');
+  var redis = require('redis');
+  var Leaderboard = require('leaderboard');
+  
+  var DBINDEX = 15;
+&nbsp;
+  g = {
+    io: undefined,
+    games: [],
+    leaderboard: null
+  };
+&nbsp;
+  function init(sio) {
+    g.io = sio;
+    
+    g.leaderboard = new Leaderboard('leaders', {pageSize: 10}, {db: DBINDEX});
+    var client = redis.createClient();
+    client.select(DBINDEX);
+    
+    bindSocketEvents();
+    return g;
+  };
+&nbsp;
+  function bindSocketEvents() {
+    g.io.sockets.on('connection', function onConnection(socket) {
+      util.log("Client has connected: " + socket.id);
+      
+      g.leaderboard.list(function(err, list) {
+        socket.emit('connected', { 
+          id: socket.id,
+          leaderboard: list
+        });
+      });
+&nbsp;
+      var game = new GameController({ id: socket.id });
+      g.games.push(game);
+      
+      //socket.on('postScore', onPostScore);
+      socket.on('buyStock', onBuyStock);
+      socket.on('sellStock', onSellStock);
+      socket.on('startInvest', onStartInvest);
+      socket.on('setPlayerName', onSetPlayerName)
+      
+      socket.on('startHunt', onStartHunt);
+      socket.on('testWord', onTestWord);
+      
+      socket.on('postScore', onPostScore);
+    });
+  };
+  
+  function onStartInvest() {
+    // TODO: Move to InvestPhase
+    var TIME_MS = 3.0e4;
+    var TIME_INTERVAL_MS = 100.0;
+    var numPoints = TIME_MS / TIME_INTERVAL_MS;
+    var self = this;
+    
+    var game = gameById(this.id);
+    
+    /* istanbul ignore if */
+    <span class="skip-if-branch" title="if path not taken" >I</span>if (!game) {
+<span class="cstat-skip" title="statement not covered" >      util.log("game not found: " + this.id);</span>
+<span class="cstat-skip" title="statement not covered" >      return;</span>
+    }
+    
+    game.setPhase('invest');
+    var InvestPhase = game.getPhase();
+    InvestPhase.startInvest();
+    self.emit('begin', {price: InvestPhase.getStockPrice()});
+    
+    var addNewPointsInterval = setInterval(
+      function () {
+        InvestPhase.addPoint();
+        self.emit('addNewPoint', {price: InvestPhase.getStockPrice()});
+      },
+      TIME_INTERVAL_MS
+    );
+    
+    setTimeout(
+<span class="fstat-no" title="function not covered" >      function() { </span>
+<span class="cstat-no" title="statement not covered" >        clearInterval(addNewPointsInterval);</span>
+<span class="cstat-no" title="statement not covered" >        game.setWallet(InvestPhase.endInvest());</span>
+<span class="cstat-no" title="statement not covered" >        self.emit('endInvest', {wallet: game.getWallet()});</span>
+      }, 
+      TIME_MS + 200.0
+    );
+  };
+  
+  function onBuyStock() {
+    var game = gameById(this.id);
+    /* istanbul ignore if  */ 
+    <span class="skip-if-branch" title="if path not taken" >I</span>if (!game) {
+<span class="cstat-skip" title="statement not covered" >      util.log("game not found: " + this.id);</span>
+<span class="cstat-skip" title="statement not covered" >      return;</span>
+    }
+    var InvestPhase = game.getPhase();
+    
+    <span class="missing-if-branch" title="if path not taken" >I</span>if(game.getPhaseName() != 'invest') <span class="cstat-no" title="statement not covered" >return;</span>
+    
+    var success = InvestPhase.buyStock();
+    <span class="missing-if-branch" title="else path not taken" >E</span>if(success) {
+      game.setScore(game.getScore() + 1);
+    }
+    
+    this.emit('buyStock', {
+      success: success,
+      wallet: game.setWallet(InvestPhase.getWallet()),
+      stockCount: InvestPhase.getStockCount(),
+      score: game.getScore()
+    });
+  };
+  
+  function onSellStock() {
+    var game = gameById(this.id);
+    /* istanbul ignore if  */  
+    <span class="skip-if-branch" title="if path not taken" >I</span>if (!game) {
+<span class="cstat-skip" title="statement not covered" >      util.log("game not found: " + this.id);</span>
+<span class="cstat-skip" title="statement not covered" >      return;</span>
+    }
+    <span class="missing-if-branch" title="if path not taken" >I</span>if(game.getPhaseName() != 'invest') <span class="cstat-no" title="statement not covered" >return;</span>
+    
+    var InvestPhase = game.getPhase();
+    
+    var success = InvestPhase.sellStock();
+    if(success) {
+      game.setScore(game.getScore() + 1);
+    }
+    this.emit('sellStock', {
+      success: success,
+      wallet: game.setWallet(InvestPhase.getWallet()),
+      stockCount: InvestPhase.getStockCount(),
+      score: game.getScore()
+    });
+  };
+  
+  function onStartHunt() { 
+    console.log('onStartHunt');
+    
+    var self = this;
+    
+    var game = gameById(this.id);
+    
+    /* istanbul ignore if  */ 
+    <span class="skip-if-branch" title="if path not taken" >I</span>if (!game) {
+<span class="cstat-skip" title="statement not covered" >      util.log("game not found: " + this.id);</span>
+<span class="cstat-skip" title="statement not covered" >      return;</span>
+    }
+    
+    var TIME_INTERVAL_MS = 5.0e3 - (game.getLevel() * 2.0e2);
+    
+    game.setPhase('hunt');
+    var HuntPhase = game.getPhase();
+    HuntPhase.startHunt();
+    
+    self.emit('begin', {
+      word: HuntPhase.getWord(),
+      opportunityToNext: HuntPhase.getOpportunityToNext()
+    });
+    
+    var counter = 0;
+    
+    var addNewPointsInterval = setInterval(
+<span class="fstat-no" title="function not covered" >      function (HuntPhase) {</span>
+<span class="cstat-no" title="statement not covered" >        if(HuntPhase.isDead() || game.getWallet() &lt;= 0 ) {</span>
+<span class="cstat-no" title="statement not covered" >          self.emit('dead');</span>
+<span class="cstat-no" title="statement not covered" >          clearInterval(addNewPointsInterval);</span>
+<span class="cstat-no" title="statement not covered" >          return;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        if(HuntPhase.isAdvance()) {</span>
+<span class="cstat-no" title="statement not covered" >          clearInterval(addNewPointsInterval);</span>
+<span class="cstat-no" title="statement not covered" >          return;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        HuntPhase.newWord();</span>
+<span class="cstat-no" title="statement not covered" >        resp = {</span>
+          word: HuntPhase.getWord(), 
+          timer: TIME_INTERVAL_MS,
+          wallet: game.setWallet(game.getWallet() - game.getLevel() * 1.0e2)
+        };
+<span class="cstat-no" title="statement not covered" >        self.emit('newWord', resp);</span>
+<span class="cstat-no" title="statement not covered" >        counter++;</span>
+      },
+      TIME_INTERVAL_MS,
+      HuntPhase
+    ); 
+  };
+  
+  function onTestWord(resp) { 
+    console.log('onTestWord');
+    
+    var game = gameById(this.id);
+    
+    /* istanbul ignore if  */  
+    <span class="skip-if-branch" title="if path not taken" >I</span>if (!game) {
+<span class="cstat-skip" title="statement not covered" >      util.log("game not found: " + this.id);</span>
+<span class="cstat-skip" title="statement not covered" >      return;</span>
+    }
+    <span class="missing-if-branch" title="if path not taken" >I</span>if(game.getPhaseName() != 'hunt') <span class="cstat-no" title="statement not covered" >return;</span>
+    
+    var HuntPhase = game.getPhase();
+    // TODO: see if correct phase
+    
+    if(!HuntPhase.isCorrect(resp)) {
+      this.emit('incorrect', {wallet: game.setWallet(HuntPhase.getWallet())});
+    }
+    
+    else {
+      game.setScore(game.getScore() +  HuntPhase.getWord().score);
+      this.emit('correct', {
+        score: game.getScore(),
+        gain: HuntPhase.getWord().score
+      });
+    }
+    <span class="missing-if-branch" title="if path not taken" >I</span>if(HuntPhase.isDead()){
+<span class="cstat-no" title="statement not covered" >        this.emit('dead');</span>
+<span class="cstat-no" title="statement not covered" >        game.die();</span>
+    }
+    <span class="missing-if-branch" title="if path not taken" >I</span>if(HuntPhase.isAdvance()) {
+<span class="cstat-no" title="statement not covered" >      this.emit('advance');</span>
+<span class="cstat-no" title="statement not covered" >      game.setPhase('');</span>
+<span class="cstat-no" title="statement not covered" >      game.level++;</span>
+      
+    }
+  };
+  
+<span class="fstat-no" title="function not covered" >  function onPostScore(data) {</span>
+<span class="cstat-no" title="statement not covered" >    console.log("test");</span>
+        
+<span class="cstat-no" title="statement not covered" >    var game = gameById(this.id);</span>
+    
+    /* istanbul ignore if  */  
+<span class="cstat-no" title="statement not covered" >    if (!game) {</span>
+<span class="cstat-skip" title="statement not covered" >      util.log("game not found: " + this.id);</span>
+<span class="cstat-skip" title="statement not covered" >      return;</span>
+    }
+<span class="cstat-no" title="statement not covered" >    var toPost = game.getDataToPost();</span>
+<span class="cstat-no" title="statement not covered" >    console.log(toPost);</span>
+<span class="cstat-no" title="statement not covered" >    if (toPost) {</span>
+<span class="cstat-no" title="statement not covered" >      g.leaderboard.add(data.name, toPost.score);</span>
+    }
+  };
+  
+  function onSetPlayerName(data) {
+    var game = gameById(this.id);
+    /* istanbul ignore if  */ 
+    <span class="skip-if-branch" title="if path not taken" >I</span>if (!game) {
+<span class="cstat-skip" title="statement not covered" >      util.log("game not found: " + this.id);</span>
+<span class="cstat-skip" title="statement not covered" >      return;</span>
+    }
+    
+    game.setName(data);
+    
+    this.emit('playerDetails', {
+      name: game.getName(),
+      id: this.id
+    });
+  };
+  
+  function gameById(id) {
+    for (var i = 0; i &lt; g.games.length; i++) {
+      if (g.games[i].getId() === id) {
+        return g.games[i];
+      }
+    }
+<span class="cstat-no" title="statement not covered" >    return false;</span>
+  };
+&nbsp;
+  init(io);
+&nbsp;
+});</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat Dec 10 2016 20:24:19 GMT-0500 (EST)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>
