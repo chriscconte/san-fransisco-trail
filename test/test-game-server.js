@@ -238,9 +238,8 @@ describe("Game Server",function(){
     var client = io.connect(socketURL, options);
 
     client.on('connected',function(data){
-      client.emit('postScore', function(data) {
-        done();
-      })
+      client.emit('postScore');
+      done();
     });
   });
   
