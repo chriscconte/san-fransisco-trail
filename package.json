@@ -162,10 +162,13 @@
     "yeast": "^0.1.2"
   },
   "devDependencies": {
-    "mocha": "^3.1.2"
+    "coveralls": "^2.11.15",
+    "mocha": "^3.1.2",
+    "mocha-lcov-reporter": "^1.2.0"
   },
   "scripts": {
     "test": "mocha --recursive",
-    "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha -- -R spec"
+    "cover": "istanbul cover ./node_modules/mocha/bin/_mocha -- -R spec",
+    "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls"
   }
 }
