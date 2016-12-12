@@ -30,7 +30,7 @@
 
 </head>
 
-<body> 
+<body class="body"> 
   
   <div ng-app="myApp" ng-controller="myCtrl as ctrl">
     <div class="container bs-docs-container">
@@ -40,23 +40,25 @@
         <img class="logo img-circle" src="images/logo.png">
         San Francisco Trail
       </div> 
-        <nav class="navbar navbar-default">
+        <nav class="navbar navbar-inverse">
           <div class="container-fluid">
-          <p class="navbar-text">Wallet: {{ctrl.player.wallet}}</p>
-          <p class="navbar-text">Level: {{ctrl.player.level}}</p>
-          <p class="navbar-text">Score: {{ctrl.player.score}}</p>
+            <div class="navbar-text wallet-container">Wallet: {{player.wallet}}</div>
+            <div class="navbar-text">Level: {{player.level}}</div>
+            <div class="navbar-text score-container">
+              Score: {{player.score}}
+            </div>
           </div>
         </nav>
       </div>
       
-      <div ng-switch on="ctrl.player.mode">
+      <div ng-switch on="player.mode">
         <div ng-switch-when="0">
           <div class="jumbotron">
             <h1>Welcome!</h1>
             <p>
               So you're a young, hip, tech-head who is fresh out of college, and you have no idea what to do. Armed with the little cash you have saved up from your summer internships (well, what you haven't spent on Soylent and Hoodies), you head out west in search of greater pastures. And thus you have put yourself on the SF trail! Invest your money in the stocks of new and emerging tech companies, then hunt and acquire those same companies. You need to be quick. So keep your eyes open!
             </p>
-            <button class="btn btn-default" ng-click="ctrl.play()"> Play now to have fun </button> 
+            <button class="btn btn-default" ng-click="play()"> Play now to have fun </button> 
           </div>
           <div class="panel panel-default">         
             <div class="panel-heading">
@@ -78,7 +80,7 @@
               </thead>
             
               <tbody>
-                <tr ng-repeat="item in ctrl.leaderboard">
+                <tr ng-repeat="item in leaderboard">
                   <td>{{item.member}}</td>
                   <td>{{item.score}}</td>
                 </tr>
@@ -86,16 +88,17 @@
             </table>
           </div>
         </div>
-        <invest ng-switch-when="1" player="ctrl.player"></invest>
-        <hunt ng-switch-when="2" player="ctrl.player"></hunt>
-        <div ng-switch-when="3" player="ctrl.player">
+        <invest ng-switch-when="1" player="player"></invest>
+        <hunt ng-switch-when="2" player="player"></hunt>
+        
+        <div ng-switch-when="3" player="player">
           <div class="jumbotron">
             Enter Your Name
             <div class="input-group">
-              <input type="text" ng-model="ctrl.player.name" class="form-control">
+              <input type="text" ng-model="player.name" class="form-control">
             </div>
-            <button ng-click="ctrl.postScore()" ng-disabled="ctrl.posted"/>
-            <div ng-hide="!ctrl.posted">
+            <button ng-click="postScore()" ng-disabled="posted"/>
+            <div ng-hide="!posted">
                Posted! Reload the page to play again.
             </div>
           </div>

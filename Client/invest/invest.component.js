@@ -21,28 +21,95 @@
         chart: {
           type: 'line',
           animation: Highcharts.svg,
-          backgroundColor: "#fde6b7"
+          backgroundColor: "#000000",
+          style: {
+            "fontFamily":"PT_Mono;",
+            "color": "#32cd32;"
+          }
         },
         legend: {
           enabled: false
         }
       },
+      colors: ["#32cd32", "#ff0000"],
+      
       series: [{
-        data: $scope.stockPrice
+        data: $scope.stockPrice,
+        color: "#32cd32"
       }],
       title: {
-        text: 'Company X' // TODO: fetch company names?
+        text: 'Company X', // TODO: fetch company names?
+        color: "#32cd32"
       },
       xAxis: {
         currentMin: 0,
         currentMax: 300,
-        title: {text: 'Days'}
+        title: {text: 'Time (100ms)'}
+      },
+      yAxis: 
+        {
+          currentMin: 0,
+          currentMax: 1000,
+          title: {text: 'Stock Price ($)'}
+        },
+        
+      loading: false
+    };
+    
+    
+    $scope.currentWallet = [ctrl.player.wallet];
+    $scope.currentStockValue = [0];
+    $scope.statsChartConfig = {
+      options: {
+        chart: {
+          type: 'column',
+          animation: Highcharts.svg,
+          backgroundColor: "#000000",
+          style: {
+            "fontFamily":"PT_Mono;",
+            "color": "#32cd32;"
+          }
+        },
+        legend: {
+          enabled: false
+        }
+      },
+      title: {
+        text: 'wealth', // TODO: fetch company names?
+        color: "#32cd32"
+      },
+      plotOptions: {
+        column: {
+          stacking: 'normal',
+        },
+        animation: {
+          duration: 1,
+        }
+      },
+      xAxis: {
+        categories: ['cash', 'stock', 'overall']
       },
       yAxis: {
-        currentMin: 0,
-        currentMax: 1000,
-        title: {text: 'Stock Price ($)'}
+        title: {text: 'wealth ($)'},
+        max: ctrl.player.wallet * 6,
+        stackLabels: {
+          enabled: true
+        }
       },
+      series: [
+        {
+          name: 'cash',
+          data: [ctrl.player.wallet]
+        },
+        {
+          name: 'stock',
+          data: [0]
+        },
+        {
+          name: 'overall',
+          data: [0]
+        }
+      ],
       loading: false
     };
     
@@ -88,6 +155,9 @@
         ctrl.player.score = resp.score;
       }
       
+      $scope.statsChartConfig.series[0].data = [$scope.currentPrice * resp.stockCount];
+      $scope.statsChartConfig.series[1].data = [resp.wallet];
+      $scope.statsChartConfig.series[2].data = [resp.wallet + $scope.currentPrice * resp.stockCount];
       $scope.stockCount = resp.stockCount;
       ctrl.player.wallet = resp.wallet;
       $scope.$ctrl.player.wallet = resp.wallet;
@@ -107,6 +177,9 @@
           100
         );
       }
+      $scope.statsChartConfig.series[0].data = [$scope.currentPrice * resp.stockCount];
+      $scope.statsChartConfig.series[1].data = [resp.wallet];
+      $scope.statsChartConfig.series[2].data = [resp.wallet + $scope.currentPrice * resp.stockCount];
       ctrl.player.score = resp.score;
       $scope.stockCount = resp.stockCount;
       ctrl.player.wallet = resp.wallet;

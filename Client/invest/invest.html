@@ -1,17 +1,25 @@
 <div class="game-container">
-      <div class="game-message" ng-if="!started && !finished">
-        <div>
-              You are about to invest in a Startup X. Be careful, buy too much and you may lose it all. Don't buy enough and you'll end up spending all your money on rent and moving back to where you are from. Buy and sell your stock whenever you please, just don't sit on your stash too long! Things change quickly around here. 
-          </div> 
-            <button type="button" class="btn btn-primary btn-lg" ng-click="startInvest()">
-            Start
-            </button>
-      </div>
+  <div class="game-message" ng-if="!started && !finished">
+    <div class="message">
+      You are about to invest in a Startup X. Be careful, buy too much and you may lose it all. Don't buy enough and you'll end up spending all your money on rent and moving back to where you are from. Buy and sell your stock whenever you please, just don't sit on your stash too long! Things change quickly around here. 
+    </div> 
+    <button type="button" class="btn btn-primary btn-lg" ng-click="startInvest()">
+      Start
+    </button>
+  </div>
   
   <div class="game-message" ng-if="started && finished">
     
-      <div>
-        You earned ${{player.wallet - walletInit}}
+      <div class="message">
+        <div ng-if="player.wallet - walletInit > 0">
+          Woo! You earned ${{player.wallet - walletInit}}
+        </div>
+        <div ng-if="player.wallet - walletInit == 0">
+          You earned <b>Nothing</b>. Are you even trying?
+        </div>
+        <div ng-if="player.wallet - walletInit == 0">
+          You lost ${{walletInit - player.wallet}}. This next hunt is gonna be tricky!
+        </div>
       </div>
       <button type="button" class="btn btn-primary btn-lg" ng-click="finishInvest()">
             Continue
@@ -31,7 +39,7 @@
         </div>
       </div>
       <div class="col-md-2 text-center">
-        <h2>${{currentPrice}}</h2>
+        <h2 style="font-family: PT_Mono; color: limegreen">${{ currentPrice }}</h2>
       </div>
       <div class="col-md-3">
         <button 
@@ -41,6 +49,16 @@
             ng-click="sellStock()" >
           Sell Stock 
         </button>
+      </div>
+      <div class="col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">Stocks:</div>
+            <div class="panel-body">
+              
+              <b>Count: </b>{{ stockCount }} <br>
+              <b>Value: </b>{{ stockCount * currentPrice }}
+            </div>
+        </div>
       </div>
 
     </div>
@@ -56,29 +74,25 @@
     <div class="col-md-4">
       <div class="row">
         <div class="panel panel-default">
-          <div class="panel-heading">Stocks:</div>
-            <div class="panel-body">
-              <b>Count: </b>{{ stockCount }} <br>
-              <b>Value: </b>{{ stockCount * currentPrice }}
-            </div>
+          <div class="panel-body">
+            <highchart id="chart1" config="statsChartConfig" class="span10"></highchart>
+          </div>
         </div>
       </div>
-      <div class="row">
-              <div class="panel panel-default">
-          <div class="panel-heading">Wallet: </div>
-            <div class="panel-body">
-              {{ player.wallet }}
-            </div>
-        </div>
-      </div>
+    </div>
+    <!--
+    
+
+
       <div class="row">
               <div class="panel panel-default">
           <div class="panel-heading">Average Buy: </div>
             <div class="panel-body">
-              {{averageBuy}}
+              {{ averageBuy }}
             </div>
         </div>
       </div>
     </div>
+-->
   </div>
   </div>

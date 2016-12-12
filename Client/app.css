@@ -3,10 +3,14 @@
     font-family: PT_Mono;
     src: url(PT_Mono/PTM55FT.ttf) format('truetype');
 }
+.body {
+  background: #525050;
+}
 
 div.title {
     font-size: 36px;
     font-family: PT_Mono;
+    color: limegreen;
 }
 
 .menu {
@@ -32,6 +36,23 @@ div.title {
   content: "|";
   padding-right: 0.3em;
 }
+.navbar-inverse .navbar-text {
+  color: limegreen;
+}
+  
+.navbar-inverse .navbar-text {
+  position: relative;
+  display: inline-block;
+  font-size: 20px;
+  height: 20px;
+  line-height: 47px;
+  font-weight: bold;
+  border-radius: 3px;
+  font-family: PT_Mono;
+  margin-top: 8px;
+  text-align: center
+}
+
 .game-message {
     display: block;
     position: absolute;
@@ -39,7 +60,8 @@ div.title {
     right: 0;
     bottom: 0;
     left: 0;
-    background: rgba(238, 228, 218, 0.73);
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.72);
     z-index: 100;
     padding-top: 40px;
     text-align: center;
@@ -49,6 +71,15 @@ div.title {
     -webkit-animation-fill-mode: both;
     -moz-animation-fill-mode: both;
     animation-fill-mode: both;
+}
+
+.message {
+  text-align: center;
+  color: limegreen;
+  font-family: PT_Mono;
+  font-weight: bold;
+  font-size: 24px;
+  margin: 40px;
 }
 
 .game-container {
@@ -78,3 +109,104 @@ div.title {
     box-shadow: 0 0 10px 10px #000;
     border-radius: 100%;
 }
+
+@-webkit-keyframes move-up {
+  0% {
+    top: 25px;
+    opacity: 1; }
+
+  100% {
+    top: -50px;
+    opacity: 0; } }
+@-moz-keyframes move-up {
+  0% {
+    top: 25px;
+    opacity: 1; }
+
+  100% {
+    top: -50px;
+    opacity: 0; } }
+@keyframes move-up {
+  0% {
+    top: 25px;
+    opacity: 1; }
+
+  100% {
+    top: -50px;
+    opacity: 0; } }
+
+.score-container {
+  position: relative;
+  display: inline-block;
+  text-align: center; }
+  .score-container:after {
+    position: absolute;
+    width: 100%;
+    top: 10px;
+    left: 0;
+    text-transform: uppercase;
+    font-size: 13px;
+    line-height: 13px;
+    text-align: center; }
+  .score-container .score-addition {
+    position: absolute;
+    right: 30px;
+    margin-top: 8px;
+    color: lime;
+    font-size: 25px;
+    line-height: 25px;
+    font-weight: bold;
+    z-index: 100;
+    -webkit-animation: move-up 600ms ease-in;
+    -moz-animation: move-up 600ms ease-in;
+    animation: move-up 600ms ease-in;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    animation-fill-mode: both;
+    }
+
+.wallet-container {
+  position: relative;
+  display: inline-block;
+  text-align: center; }
+  .wallet-container:after {
+    position: absolute;
+    width: 100%;
+    top: 10px;
+    left: 0;
+    text-transform: uppercase;
+    font-size: 13px;
+    line-height: 13px;
+    text-align: center; }
+  .wallet-container .wallet-addition {
+    position: absolute;
+    right: 30px;
+    margin-top: 8px;
+    color: lime;
+    font-size: 25px;
+    line-height: 25px;
+    font-weight: bold;
+    z-index: 100;
+    -webkit-animation: move-up 600ms ease-in;
+    -moz-animation: move-up 600ms ease-in;
+    animation: move-up 600ms ease-in;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    animation-fill-mode: both;
+    }
+  .wallet-container .wallet-subtraction {
+    position: absolute;
+    right: 30px;
+    margin-top: 8px;
+    color: red;
+    font-size: 25px;
+    line-height: 25px;
+    font-weight: bold;
+    z-index: 100;
+    -webkit-animation: move-up 600ms ease-in;
+    -moz-animation: move-up 600ms ease-in;
+    animation: move-up 600ms ease-in;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    animation-fill-mode: both;
+    }
