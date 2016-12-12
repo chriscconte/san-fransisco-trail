@@ -14,7 +14,7 @@ A parody of Oregon Trail, for ASE
 ### Build Script:
 
 
-#### running the server
+#### Running the server
 
 bower install -g
 
@@ -24,7 +24,7 @@ node index.js
 
 /// Running on port  8000 ...
 
-#### testing
+#### Testing
 
 
 bower install -g
@@ -32,6 +32,10 @@ bower install -g
 npm install -g
 
 npm test
+
+#### Coverage 
+
+npm run cover
 
 ### Framework Versions
 AngularJS 1.5.8
