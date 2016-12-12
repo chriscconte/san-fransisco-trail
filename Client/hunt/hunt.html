@@ -1,66 +1,60 @@
 <div class="game-container">
 <div class="game-message" ng-if="!started && !finished">
-  <div>
-   You are about to begin the hunt phase. Type the words that appear on the screen, or it will cost you! Type too slow, or too many wrong words and you lose your next opportunity.
+  
+  <div class="message">
+   You are about to begin the hunt phase. Coding for one-man startups is a back against-the-wall business, so try to limit the financial damage by coding quickly and accurately. Type the words that appear on the screen, and score enough lines guarantee your next payoff! Type to slow and lose money, type wrong and you really lose money.Good luck! You don't want to go home, do you?
   </div> 
-  <button type="button" class="btn btn-primary btn-lg" ng-click="startHunt()">
+  <button type="button" class="btn btn-default btn-lg" ng-click="startHunt()">
   Start
   </button>
 </div>
 <div class="game-message" ng-if="started && advance">
-  <div>
+  <div class="message">
    Good job! You found your next opportunity. Time to invest again!
   </div> 
-  <button type="button" class="btn btn-primary btn-lg" ng-click="advanceToInvest()">
+  <button type="button" class="btn btn-default btn-lg" ng-click="advanceToInvest()">
   Continue
   </button>
 </div>
 <div class="game-message" ng-if="started && dead">
-  <div>
+  <div class="message">
    That's it for now! Continue to enter your name and post your score.
   </div> 
-  <button type="button" class="btn btn-primary btn-lg" ng-click="advanceToPost()">
+  <button type="button" class="btn btn-default btn-lg" ng-click="advanceToPost()">
   Continue
   </button>
 </div>
-  
+  <div class="panel panel-default">
+  <div class="panel-body" style="">
+    <code class="language-javascript" data-lang="javascript" style="color: red; font-size: large;">
+    {{currentWord.word}}
+    </code>
+  </div>
+</div>
 <div class="panel panel-default">
   <div class="panel-body">
     <div class="progress">
       <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" ng-style="{'width':''+100*opportunityGained/opportunityToNext+'%'}">
         {{opportunityGained}}
       </div>
-    </div>
-    <code class="language-javascript" data-lang="javascript">
-     def  main(): <br>
-    companyName= “”; <br>
-    input = getUserInput(); <br>
-    for i in range(0, len(input)): <br>
+    </div><form ng-submit="testWord()">
+    <pre><code class="language-python" data-lang="python">
+    def  main(): <br>
+    companyName= “” <br>
     output = output + process(input[i]) <br>
-    ipoSuccess = ipoCompany([name for user to enter here]) <br>
-    if (ipoSuccess == true): <br>
-    celebrations()<br> 
-    goToNextWord()<br>
-    else: <br>
-    failure()<br>
-    takeMoney()<br>
-    goToNextWord()<br>
-    
-    main()<br>
-    </code>
-    
-    
-    {{currentWord.word}}
-  </div>
-</div>
-
-<div class="panel panel-default">
-  <div class="panel-body">
-    <form ng-submit="testWord()">
-      <div class="input-group">
+    ipoSuccess = ipoCompany(    
+      <span class="input-group">
         <input type="text" ng-model="guess" class="form-control" aria-describedby="basic-addon1">
-        <input type="submit" style="display: hidden;">
-      </div>
+      </span>
+    ) <br>
+    if (ipoSuccess == true): <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;celebrations()<br> 
+    &nbsp;&nbsp;&nbsp;&nbsp;goToNextWord()<br>
+    else: <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;failure()<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;takeMoney()<br>
+    goToNextWord()<br>
+    </code></pre>
     </form>
   </div>
 </div>

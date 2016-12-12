@@ -1,9 +1,9 @@
 <div class="game-container">
   <div class="game-message" ng-if="!started && !finished">
     <div class="message">
-      You are about to invest in a Startup X. Be careful, buy too much and you may lose it all. Don't buy enough and you'll end up spending all your money on rent and moving back to where you are from. Buy and sell your stock whenever you please, just don't sit on your stash too long! Things change quickly around here. 
+      One of the startups you worked at is IPO'ing! Time to pay off all that code you gave away for percentage points. Be careful, buy too much and you may lose it all. Don't buy enough and you'll end up spending all your money on rent and moving back to where you are from. Buy and sell your stock whenever you please, just don't sit on your stash too long! Things change quickly around here. 
     </div> 
-    <button type="button" class="btn btn-primary btn-lg" ng-click="startInvest()">
+    <button type="button" class="btn btn-default btn-lg" ng-click="startInvest()">
       Start
     </button>
   </div>
@@ -17,11 +17,11 @@
         <div ng-if="player.wallet - walletInit == 0">
           You earned <b>Nothing</b>. Are you even trying?
         </div>
-        <div ng-if="player.wallet - walletInit == 0">
+        <div ng-if="player.wallet - walletInit < 0">
           You lost ${{walletInit - player.wallet}}. This next hunt is gonna be tricky!
         </div>
       </div>
-      <button type="button" class="btn btn-primary btn-lg" ng-click="finishInvest()">
+      <button type="button" class="btn btn-default btn-lg" ng-click="finishInvest()">
             Continue
           </button>
     </div>
@@ -31,7 +31,7 @@
         <div class="pull-right">
           <button 
             type="button" 
-            class="btn btn-primary btn-lg"
+            class="btn btn-default btn-lg"
             id="buyStock"
             ng-click="buyStock()" >
             Buy Stock 
@@ -44,7 +44,7 @@
       <div class="col-md-3">
         <button 
             type="button" 
-            class="btn btn-primary btn-lg"  
+            class="btn btn-default btn-lg"  
             id="sellStock"
             ng-click="sellStock()" >
           Sell Stock 
@@ -52,7 +52,6 @@
       </div>
       <div class="col-md-4">
         <div class="panel panel-default">
-          <div class="panel-heading">Stocks:</div>
             <div class="panel-body">
               
               <b>Count: </b>{{ stockCount }} <br>

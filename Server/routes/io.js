@@ -79,7 +79,11 @@ module.exports =
     var addNewPointsInterval = setInterval(
       function () {
         InvestPhase.addPoint();
-        self.emit('addNewPoint', {price: InvestPhase.getStockPrice()});
+        self.emit('addNewPoint', {
+          price: InvestPhase.getStockPrice(),
+          wallet: InvestPhase.getWallet(),
+          stockCount: InvestPhase.getStockCount()
+        });
       },
       TIME_INTERVAL_MS
     );
@@ -154,7 +158,7 @@ module.exports =
       return;
     }
     
-    var TIME_INTERVAL_MS = 5.0e3 - (game.getLevel() * 2.0e2);
+    var TIME_INTERVAL_MS = 5.0e3 - (game.getLevel() * 4.0e2);
     
     game.setPhase('hunt');
     var HuntPhase = game.getPhase();
@@ -231,7 +235,6 @@ module.exports =
   };
   
   function onPostScore(data) {
-    console.log("test");
         
     var game = gameById(this.id);
     
@@ -241,7 +244,6 @@ module.exports =
       return;
     }
     var toPost = game.getDataToPost();
-    console.log(toPost);
     if (toPost) {
       g.leaderboard.add(data.name, toPost.score);
     }

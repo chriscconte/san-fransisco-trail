@@ -236,6 +236,7 @@ describe("Game Server (black box)",function(){
   });
   
   describe('use case: player wants to post to the leaderboard', function(done) {
+    
     it('Should be able to fetch the leaderboard', function(done){
       var client = io.connect(socketURL, options);
   
@@ -247,7 +248,7 @@ describe("Game Server (black box)",function(){
     });
     
     // try to post when not dead
-    it('Should be able to fetch the leaderboard', function(done){
+    it('Should be able to post when dead', function(done){
       var client = io.connect(socketURL, options);
   
       client.on('connected',function(data){

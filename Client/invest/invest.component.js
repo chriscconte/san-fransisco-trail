@@ -63,7 +63,7 @@
       options: {
         chart: {
           type: 'column',
-          animation: Highcharts.svg,
+          animation: false,
           backgroundColor: "#000000",
           style: {
             "fontFamily":"PT_Mono;",
@@ -82,9 +82,7 @@
         column: {
           stacking: 'normal',
         },
-        animation: {
-          duration: 1,
-        }
+        animation: false,
       },
       xAxis: {
         categories: ['cash', 'stock', 'overall']
@@ -113,6 +111,11 @@
       loading: false
     };
     
+    var updateStats = function(resp) {
+      $scope.statsChartConfig.series[0].data = [resp.wallet];
+      $scope.statsChartConfig.series[1].data = [$scope.currentPrice * resp.stockCount];
+      $scope.statsChartConfig.series[2].data = [resp.wallet + $scope.currentPrice * resp.stockCount];
+    }
     $scope.startInvest = function () {
       socket.emit('startInvest', {level: 1});
     };
@@ -123,6 +126,8 @@
     });
     
     socket.on('addNewPoint', function(resp) {
+      updateStats(resp);
+      
       $scope.currentPrice = resp.price;
       $scope.stockPrice.push(resp.price);
     });
@@ -138,6 +143,7 @@
     };
     
     socket.on('buyStock', function (resp) {
+      updateStats(resp);
       if(!resp.success) {
         // BUGBUG: cannot set property 'class' of null 
         document.getElementById('buyStock').class = "btn btn-warning btn-lg";
@@ -155,9 +161,6 @@
         ctrl.player.score = resp.score;
       }
       
-      $scope.statsChartConfig.series[0].data = [$scope.currentPrice * resp.stockCount];
-      $scope.statsChartConfig.series[1].data = [resp.wallet];
-      $scope.statsChartConfig.series[2].data = [resp.wallet + $scope.currentPrice * resp.stockCount];
       $scope.stockCount = resp.stockCount;
       ctrl.player.wallet = resp.wallet;
       $scope.$ctrl.player.wallet = resp.wallet;
@@ -168,6 +171,7 @@
     };
     
     socket.on('sellStock', function (resp) {
+      updateStats(resp);
       if(!resp.success) {
         document.getElementById('sellStock').class = "btn btn-warning btn-lg";
         $timeout(
@@ -177,9 +181,6 @@
           100
         );
       }
-      $scope.statsChartConfig.series[0].data = [$scope.currentPrice * resp.stockCount];
-      $scope.statsChartConfig.series[1].data = [resp.wallet];
-      $scope.statsChartConfig.series[2].data = [resp.wallet + $scope.currentPrice * resp.stockCount];
       ctrl.player.score = resp.score;
       $scope.stockCount = resp.stockCount;
       ctrl.player.wallet = resp.wallet;

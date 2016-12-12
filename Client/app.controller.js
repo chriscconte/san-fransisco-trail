@@ -18,7 +18,6 @@
         isDead: false
       };
     
-    
       ctrl.$watch('player.score', function(newValue, oldValue) {
         
         var scoreContainer = document.querySelector(".score-container");
