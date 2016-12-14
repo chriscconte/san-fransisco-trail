@@ -39,6 +39,12 @@ npm test
 
 #### Coverage 
 
+bower install -g
+
+npm install
+
+redis-server (run the server in a separate window)
+
 npm run cover
 
 ### Framework Versions
