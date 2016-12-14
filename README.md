@@ -28,7 +28,6 @@ node index.js
 
 #### Testing
 
-
 bower install -g
 
 npm install
