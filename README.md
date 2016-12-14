@@ -18,7 +18,7 @@ A parody of Oregon Trail, for ASE
 
 bower install -g
 
-npm install -g
+npm install
 
 redis-server (run the server in a separate window)
 
@@ -31,7 +31,7 @@ node index.js
 
 bower install -g
 
-npm install -g
+npm install
 
 redis-server (run the server in a separate window)
 
