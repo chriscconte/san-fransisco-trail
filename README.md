@@ -20,6 +20,8 @@ bower install -g
 
 npm install -g
 
+redis-server (run the server in a separate window)
+
 node index.js
 
 /// Running on port  8000 ...
@@ -30,6 +32,8 @@ node index.js
 bower install -g
 
 npm install -g
+
+redis-server (run the server in a separate window)
 
 npm test
 
